@@ -1,0 +1,431 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>获取tomcat ip和端口号 | anshome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="anseirai">
+    
+
+    
+    <meta name="description" content="Introduction用代码获取tomcat server的ip和端口号，注意这不是servlet中用request请求的客户端的ip地址。是代码运行所在的tomcat的真实ip地址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="获取tomcat ip和端口号">
+<meta property="og:url" content="http://yoursite.com/2015/02/13/[Tomcat]获取tomcat ip和端口号/index.html">
+<meta property="og:site_name" content="anshome">
+<meta property="og:description" content="Introduction用代码获取tomcat server的ip和端口号，注意这不是servlet中用request请求的客户端的ip地址。是代码运行所在的tomcat的真实ip地址。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="获取tomcat ip和端口号">
+<meta name="twitter:description" content="Introduction用代码获取tomcat server的ip和端口号，注意这不是servlet中用request请求的客户端的ip地址。是代码运行所在的tomcat的真实ip地址。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/02/13/[Tomcat]获取tomcat ip和端口号/" title="获取tomcat ip和端口号" itemprop="url">获取tomcat ip和端口号</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
+		
+  <p class="article-time">
+    <time datetime="2015-02-13T07:14:45.000Z" itemprop="datePublished"> 發表於 2015-02-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关知识"><span class="toc-number">2.</span> <span class="toc-text">相关知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="Introduction">Introduction</h2><p>用代码获取tomcat server的ip和端口号，注意这不是servlet中用request请求的客户端的ip地址。是代码运行所在的tomcat的真实ip地址。<br><a id="more"></a></p>
+<h2 id="相关知识">相关知识</h2><p>本代码只是写出了获取端口号和局域网ip地址的方法，若想取出真实ip地址，可以利用<a href="https://docs.oracle.com/javase/6/docs/api/java/net/InetAddress.html" target="_blank" rel="external"><code>InetAddress</code></a>类提供的接口进行判断！顺便贴下找到的关于IP地址段的知识。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Unicast</span><br><span class="line">? AnyLocalAddress: <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line">? LinkLocalAddress: <span class="number">169.254</span>.<span class="number">0.0</span> – <span class="number">169.254</span>.<span class="number">255.255</span></span><br><span class="line">? LoopbackAddress: <span class="number">127.0</span>.<span class="number">0.0</span> – <span class="number">127.255</span>.<span class="number">255.255</span></span><br><span class="line">? SiteLocalAddress: <span class="number">10.0</span>.<span class="number">0.0</span> – <span class="number">10.255</span>.<span class="number">255.255</span>, <span class="number">172.16</span>.<span class="number">0.0</span> – <span class="number">172.31</span>.<span class="number">255.255</span>, <span class="number">192.168</span>.<span class="number">0.0</span> – <span class="number">192.168</span>.<span class="number">255.255</span></span><br><span class="line">– Multicast: <span class="number">224.0</span>.<span class="number">0.0</span> – <span class="number">239.255</span>.<span class="number">255.255</span></span><br><span class="line">? MulticastGlobal: <span class="number">224.0</span>.<span class="number">1.0</span> – <span class="number">238.255</span>.<span class="number">255.255</span></span><br><span class="line">? MulticastLinkLocal: <span class="number">224.0</span>.<span class="number">0.0</span> – <span class="number">224.0</span>.<span class="number">0.255</span> and ttl = <span class="number">1</span></span><br><span class="line">? MulticastNodeLocal: never, unless ttl = <span class="number">0</span></span><br><span class="line">? MulticastOrgLocal: <span class="number">239.192</span>.<span class="number">0.0</span> – <span class="number">229.195</span>.<span class="number">255.255</span></span><br><span class="line">? MulticastSiteLocal: <span class="number">239.255</span>.<span class="number">0.0</span> – <span class="number">239.255</span>.<span class="number">255.255</span> or ttl &lt; <span class="number">32</span></span><br></pre></td></tr></table></figure>
+<h2 id="解决方法">解决方法</h2><p>下面记录写出的工具类</p>
+<figure class="highlight bash"><figcaption><span>java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">package com.business.common.util;</span><br><span class="line"></span><br><span class="line">import java.lang.management.ManagementFactory;</span><br><span class="line">import java.net.InetAddress;</span><br><span class="line">import java.net.NetworkInterface;</span><br><span class="line">import java.net.SocketException;</span><br><span class="line">import java.util.Enumeration;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.Set;</span><br><span class="line"> </span><br><span class="line">import javax.management.MBeanServer;</span><br><span class="line">import javax.management.MalformedObjectNameException;</span><br><span class="line">import javax.management.ObjectName;</span><br><span class="line">import javax.management.Query;</span><br><span class="line"> </span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line"> </span><br><span class="line">public class IPAddressAndPortUtils &#123;</span><br><span class="line">    private static final Log LOG = Log.getLog(IPAddressAndPortUtils.class);</span><br><span class="line">     </span><br><span class="line">    public static String <span class="function"><span class="title">getTomcatPort</span></span>() &#123;</span><br><span class="line">        MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();</span><br><span class="line">        Set&lt;ObjectName&gt; objs = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            objs = mbs.queryNames(new ObjectName(<span class="string">"*:type=Connector,*"</span>),</span><br><span class="line">                    Query.match(Query.attr(<span class="string">"protocol"</span>), Query.value(<span class="string">"HTTP/1.1"</span>)));</span><br><span class="line">        &#125; catch (MalformedObjectNameException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">"A MalformedObjectNameException is invoked."</span>, e);</span><br><span class="line">        &#125; catch (NullPointerException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">"A NullPointerException is invoked."</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">        LOG.debug(<span class="string">"Objs size : &#123;&#125;"</span>, objs.size());</span><br><span class="line">         </span><br><span class="line">        String port = null;</span><br><span class="line">        <span class="keyword">for</span> (Iterator&lt;ObjectName&gt; i = objs.iterator(); i.hasNext(); ) &#123;</span><br><span class="line">            ObjectName obj = i.next();</span><br><span class="line">            port = obj.getKeyProperty(<span class="string">"port"</span>);</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(port)) &#123;</span><br><span class="line">                <span class="built_in">return</span> port;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="built_in">return</span> port;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    public static String <span class="function"><span class="title">getServerSiteLocalAddress</span></span>() &#123;</span><br><span class="line">        Enumeration&lt;NetworkInterface&gt; networkInterfaces = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            networkInterfaces = NetworkInterface.getNetworkInterfaces();</span><br><span class="line">        &#125; catch (SocketException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">"A SocketException is invoked."</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">        String tomcatIp = null;</span><br><span class="line">        <span class="keyword">while</span> (networkInterfaces.hasMoreElements()) &#123;</span><br><span class="line">            NetworkInterface networkInterface = (NetworkInterface) networkInterfaces.nextElement();</span><br><span class="line">            Enumeration&lt;InetAddress&gt; inetAddresses = networkInterface.getInetAddresses();</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">while</span> (inetAddresses.hasMoreElements()) &#123;</span><br><span class="line">                InetAddress inetAddress = (InetAddress) inetAddresses.nextElement();</span><br><span class="line">                 </span><br><span class="line">                <span class="keyword">if</span> (inetAddress.isSiteLocalAddress()) &#123;</span><br><span class="line">                    tomcatIp = inetAddress.getHostAddress();</span><br><span class="line">                    LOG.debug(<span class="string">"Web server ip : &#123;&#125;."</span>, tomcatIp);</span><br><span class="line">                    <span class="built_in">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="built_in">return</span> tomcatIp;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/tomcat/">tomcat</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/02/13/[Tomcat]获取tomcat ip和端口号/" data-title="获取tomcat ip和端口号 | anshome" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/03/hello-world/" title="Hello World">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Hello World</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/29/[Tomcat]tomcat中connector中的参数/"  title="tomcat中connector中的参数">
+ <strong>下一篇：</strong><br/> 
+ <span>tomcat中connector中的参数
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关知识"><span class="toc-number">2.</span> <span class="toc-text">相关知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Mysql/" title="Mysql">Mysql<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cas/" title="cas">cas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/tomcat/" title="tomcat">tomcat<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码的农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 既然无路可选，就做好当下的事。 <br/>
+			This is truely アンセイライ&#39;s blog.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="anseirai">anseirai</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

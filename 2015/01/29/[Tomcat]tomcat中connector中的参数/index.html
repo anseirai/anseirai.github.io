@@ -4,22 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | anshome</title>
+    <title>tomcat中connector中的参数 | anshome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="anseirai">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+    <meta name="description" content="Introduction最近总是出现测试环境出错，而本地环境没错。用chrome查看请求详情如下图1、图2：图片1图片2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2015/05/03/hello-world/index.html">
+<meta property="og:title" content="tomcat中connector中的参数">
+<meta property="og:url" content="http://yoursite.com/2015/01/29/[Tomcat]tomcat中connector中的参数/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="Introduction最近总是出现测试环境出错，而本地环境没错。用chrome查看请求详情如下图1、图2：图片1图片2">
+<meta property="og:image" content="http://womenzouba.qiniudn.com/QQ截图20150129162459.jpg">
+<meta property="og:image" content="http://womenzouba.qiniudn.com/QQ截图20150129162628.jpg">
+<meta property="og:image" content="http://womenzouba.qiniudn.com/QQ截图20150129164045.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="tomcat中connector中的参数">
+<meta name="twitter:description" content="Introduction最近总是出现测试环境出错，而本地环境没错。用chrome查看请求详情如下图1、图2：图片1图片2">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -75,14 +78,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/03/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/01/29/[Tomcat]tomcat中connector中的参数/" title="tomcat中connector中的参数" itemprop="url">tomcat中connector中的参数</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-03T15:14:45.000Z" itemprop="datePublished"> 發表於 2015-05-03</time>
+    <time datetime="2015-01-29T08:35:42.000Z" itemprop="datePublished"> 發表於 2015-01-29</time>
     
   </p>
 </header>
@@ -91,19 +94,16 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发现问题"><span class="toc-number">2.</span> <span class="toc-text">发现问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a></li></ol>
 		
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<h2 id="Introduction">Introduction</h2><p>最近总是出现测试环境出错，而本地环境没错。用chrome查看请求详情如下图1、图2：<br><img src="http://womenzouba.qiniudn.com/QQ截图20150129162459.jpg" alt=""><br>图片1<br><img src="http://womenzouba.qiniudn.com/QQ截图20150129162628.jpg" alt=""><br>图片2<br><a id="more"></a></p>
+<h2 id="发现问题">发现问题</h2><p>今天网络出奇的好，终于能够重新远程debug了。调号端口，走你。。。</p>
+<p>点了若干次F6后，终于看到了一个异常：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.apache.coyote.http11.HeadersTooLargeException: An attempt was made to write more data to the response headers than there was room available <span class="keyword">in</span> the buffer. Increase maxHttpHeaderSize on the connector or write less data into the response headers.</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法">解决方法</h2><p>经查询得知：是<a href="http://stackoverflow.com/questions/21638890/servletresponse-setbuffersize-doesnt-work-in-tomcat-7" target="_blank" rel="external">tomcat connector的原因</a> ，还给出了<a href="http://tomcat.apache.org/tomcat-7.0-doc/config/http.html" target="_blank" rel="external">tomcat7官方配置</a>，<code>connector</code>中增加<code>maxHttpHeaderSize</code>设置即可，如下图3。<br><img src="http://womenzouba.qiniudn.com/QQ截图20150129164045.jpg" alt=""><br>图片3</p>
+<p>这下就不会出问题了。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,7 +111,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/hello-world/">hello world</a>
+  <a class="article-category-link" href="/categories/tomcat/">tomcat</a>
 </div>
 
 
@@ -121,7 +121,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/05/03/hello-world/" data-title="Hello World | anshome" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/01/29/[Tomcat]tomcat中connector中的参数/" data-title="tomcat中connector中的参数 | anshome" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,18 +135,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/03/[cas]CAS单点登录、单点退出nginx下多个应用服务器问题的解决/" title="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决">
+ <a href="/2015/02/13/[Tomcat]获取tomcat ip和端口号/" title="获取tomcat ip和端口号">
   <strong>上一篇：</strong><br/>
   <span>
-  CAS单点登录、单点退出|nginx下多个应用服务器问题的解决</span>
+  获取tomcat ip和端口号</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/02/13/[Tomcat]获取tomcat ip和端口号/"  title="获取tomcat ip和端口号">
+<a href="/2015/01/29/[other]应不应该发布研究型软件/"  title="应不应该发布研究型软件">
  <strong>下一篇：</strong><br/> 
- <span>获取tomcat ip和端口号
+ <span>应不应该发布研究型软件
 </span>
 </a>
 </div>
@@ -161,7 +161,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发现问题"><span class="toc-number">2.</span> <span class="toc-text">发现问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a></li></ol>
  
   </div>
 
