@@ -71,41 +71,114 @@
     <div id="container">
       <div id="main">
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/03/hello-world - 副本/" title="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决" itemprop="url">
-  
-    <h1 itemprop="name">CAS单点登录、单点退出|nginx下多个应用服务器问题的解决</h1>
+   
     
-     
-       <p itemprop="description" >背景
-系统内有多个应用，例如：admin、callcenter、frontweb、phone等，每个应用有多个运行的实例，例如：admin1、admin2、frontweb1、frontweb2、frontweb3等。同一个应用的实例可能分布在不同的实体机器上，也可能在相同的机器</p>
-      
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-    <time datetime="2015-05-03T15:14:45.000Z" itemprop="datePublished">2015-05-03</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/03/hello-world/" title="Hello World" itemprop="url">
-  
-    <h1 itemprop="name">Hello World</h1>
+      <a href="/2015/05/03/hello-world - 副本/" title="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决" itemprop="url">CAS单点登录、单点退出|nginx下多个应用服务器问题的解决</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-03T15:14:45.000Z" itemprop="datePublished"> 發表於 2015-05-03</time>
     
-     
-           <p itemprop="description" >Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the </p>
+  </p>
+</header>
+    <div class="article-content">
         
+        <h3 id="背景">背景</h3><hr>
+<p>系统内有多个应用，例如：admin、callcenter、frontweb、phone等，每个应用有多个运行的实例，例如：admin1、admin2、frontweb1、frontweb2、frontweb3等。同一个应用的实例可能分布在不同的实体机器上，也可能在相同的机器上，每一个实例就是一个tomcat。但是，所有访问必须先通过nginx，由它决定最终要访问哪个tomcat。</p>
+<p>现在，要增加单点登录和单点退出的功能，即在一个应用上登录后，在其他应用不需要重复登录了。</p>
+<h3 id="遇到的问题">遇到的问题</h3><hr>
+<p>按照网上的大多数流程配置完成后，在本地调试可以正常运行，也看不出什么问题，因为本地没有多个应用的实例，并且本地也没有配置nginx。</p>
+<p>但是在真实环境下，有多个admin和多个callcenter应用实例，单点登录没问题，但是当用户在admin退出后，之前登录的callcenter依旧可以正常使用，出问题了。<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/03/hello-world - 副本/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2015-05-03T09:24:57.762Z" itemprop="datePublished">2015-05-03</time>
-  </a>
-</section>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/03/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-03T09:24:57.762Z" itemprop="datePublished"> 發表於 2015-05-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
 
 
 
