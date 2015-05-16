@@ -4,28 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>ubuntu安装JDK1.7的经历 | anshome</title>
+    <title>秘钥仓库 | anshome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="anseirai">
     
 
     
-    <meta name="description" content="Introduction因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。
-最主要的参考资料是这里。
-下载文件中不是在上述网址总下载得到的。是以前在官网下载的。">
+    <meta name="description" content="Introduction看了项目后，发现内部有秘钥之类的东西，看不太懂。于是，网络上找了相关的知识，并作简要记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu安装JDK1.7的经历">
-<meta property="og:url" content="http://yoursite.com/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/index.html">
+<meta property="og:title" content="秘钥仓库">
+<meta property="og:url" content="http://yoursite.com/2014/11/26/[秘钥]秘钥仓库/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introduction因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。
-最主要的参考资料是这里。
-下载文件中不是在上述网址总下载得到的。是以前在官网下载的。">
+<meta property="og:description" content="Introduction看了项目后，发现内部有秘钥之类的东西，看不太懂。于是，网络上找了相关的知识，并作简要记录。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu安装JDK1.7的经历">
-<meta name="twitter:description" content="Introduction因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。
-最主要的参考资料是这里。
-下载文件中不是在上述网址总下载得到的。是以前在官网下载的。">
+<meta name="twitter:title" content="秘钥仓库">
+<meta name="twitter:description" content="Introduction看了项目后，发现内部有秘钥之类的东西，看不太懂。于是，网络上找了相关的知识，并作简要记录。">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -81,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/" title="ubuntu安装JDK1.7的经历" itemprop="url">ubuntu安装JDK1.7的经历</a>
+      <a href="/2014/11/26/[秘钥]秘钥仓库/" title="秘钥仓库" itemprop="url">秘钥仓库</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2013-12-16T09:09:03.000Z" itemprop="datePublished"> 发表于 2013-12-16</time>
+    <time datetime="2014-11-26T01:24:45.000Z" itemprop="datePublished"> 发表于 2014-11-26</time>
     
   </p>
 </header>
@@ -97,25 +91,16 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解压jdk-7u45-linux-i586-tar(1)-gz"><span class="toc-number">2.</span> <span class="toc-text">解压jdk-7u45-linux-i586.tar(1).gz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">3.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Over"><span class="toc-number">4.</span> <span class="toc-text">Over</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Others"><span class="toc-number">5.</span> <span class="toc-text">Others</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关知识"><span class="toc-number">2.</span> <span class="toc-text">相关知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有关代码实现"><span class="toc-number">3.</span> <span class="toc-text">有关代码实现</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="Introduction">Introduction</h3><p>因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。</p>
-<p>最主要的参考资料是<a href="http://blog.csdn.net/snowdream86/article/details/6677450" target="_blank" rel="external">这里</a>。</p>
-<p>下载文件中不是在上述网址总下载得到的。是以前在<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">官网</a>下载的。<br><a id="more"></a></p>
-<h3 id="解压jdk-7u45-linux-i586-tar(1)-gz">解压jdk-7u45-linux-i586.tar(1).gz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar zxvf ./jdk-<span class="number">7</span>u45-linux-i586.tar(<span class="number">1</span>).gz</span><br></pre></td></tr></table></figure>
-<p>为方便，修改文件名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv jdk-<span class="number">7</span>u45-linux-i586.tar(<span class="number">1</span>).gz jdk1.<span class="number">7</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="配置环境变量">配置环境变量</h3><p>执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>在打开文件最后，添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk1.<span class="number">7</span></span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<p>保存退出，输入以下命令使之立即生效。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-<h3 id="Over">Over</h3><p>上述参考文章里面还有配置默认JDK版本，由于我是按照那个文章的顺序配置的，所以在配置默认JDK前不知道是否已经配置好，但是觉得应该是这样的：如果只有一个JDK，就不用配置默认的JDK。</p>
-<p>最后，用命令测试JDK是否安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<h3 id="Others">Others</h3><p>这中间也参考了<a href="http://qinshanwu.iteye.com/blog/342916" target="_blank" rel="external">http://qinshanwu.iteye.com/blog/342916</a>这篇文章，主要是vi编辑方面。</p>
+		<h3 id="Introduction">Introduction</h3><p>看了项目后，发现内部有秘钥之类的东西，看不太懂。于是，网络上找了相关的知识，并作简要记录。<br><a id="more"></a></p>
+<h3 id="相关知识">相关知识</h3><p>下文是截取的<a href="http://bbs.csdn.net/topics/330048918#post-330750054" target="_blank" rel="external">网络资源</a>：</p>
+<blockquote>
+<p>通常所说的证书是x.509证书格式，每个证书都含有一对密钥和一个指纹，一对密钥也就是公钥和私钥，公钥可以分发出去，私钥自己保密。用公钥加密的内容，只能用私钥解出；用私钥加密的内容，只能用公钥解出。<br>所以，只要是标准格式的密钥，采用的就会是标准的算法，不会因使用环境发生改变而改变。<br>只是Tomcat使用的是keystore格式的证书库，因此要把证书导入到keystore中。<br>在IIS中，可能也有证书库，你只要把证书导入到IIS的证书库中就行。<br>当然，证书因为格式不同可能需要转换，我所知道的就有P12,PIX,CER这些格式。</p>
+</blockquote>
+<h3 id="有关代码实现">有关代码实现</h3><p>信息摘要|私钥加密|公钥加密|数字签名|数字证书 请参考<a href="http://blog.csdn.net/sunguangran/article/details/6742463" target="_blank" rel="external">这个链接</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -123,7 +108,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/tomcat/">tomcat</a>
+  <a class="article-category-link" href="/categories/秘钥/">秘钥</a>
 </div>
 
 
@@ -133,7 +118,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/" data-title="ubuntu安装JDK1.7的经历 | anshome" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2014/11/26/[秘钥]秘钥仓库/" data-title="秘钥仓库 | anshome" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -147,19 +132,27 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/11/06/[Java]static和final的解答/" title="static和final的解答|==">
+ <a href="/2014/12/15/[Mysql]mysql自增属性说明和mysql SHOW语句说明/" title="mysql自增属性说明和mysql SHOW语句说明">
   <strong>上一篇：</strong><br/>
   <span>
-  static和final的解答|==</span>
+  mysql自增属性说明和mysql SHOW语句说明</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2014/11/25/[黑客]有趣的小黑客/"  title="有趣的小黑客">
+ <strong>下一篇：</strong><br/> 
+ <span>有趣的小黑客
+</span>
+</a>
+</div>
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/" data-title="ubuntu安装JDK1.7的经历" data-url="http://yoursite.com/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/"></div>
+	<div class="ds-thread" data-thread-key="2014/11/26/[秘钥]秘钥仓库/" data-title="秘钥仓库" data-url="http://yoursite.com/2014/11/26/[秘钥]秘钥仓库/"></div>
 </section>
 
 
@@ -169,7 +162,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解压jdk-7u45-linux-i586-tar(1)-gz"><span class="toc-number">2.</span> <span class="toc-text">解压jdk-7u45-linux-i586.tar(1).gz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">3.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Over"><span class="toc-number">4.</span> <span class="toc-text">Over</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Others"><span class="toc-number">5.</span> <span class="toc-text">Others</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关知识"><span class="toc-number">2.</span> <span class="toc-text">相关知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有关代码实现"><span class="toc-number">3.</span> <span class="toc-text">有关代码实现</span></a></li></ol>
  
   </div>
 
