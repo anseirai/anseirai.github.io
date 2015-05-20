@@ -4,28 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>ubuntu安装JDK1.7的经历 | anshome</title>
+    <title>什么是restful接口 | anshome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="anseirai">
     
 
     
-    <meta name="description" content="Introduction因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。
-最主要的参考资料是这里。
-下载文件中不是在上述网址总下载得到的。是以前在官网下载的。">
+    <meta name="description" content="Introduction今天宿舍发起了一场“什么事rest接口，rest接口和以往的接口，有什么不同？”的争论。最后由我们伟神进行了权威解答。核心要点是——资源，rest接口是以资源为导向的。为了搞清楚这些问题，同时试图理解资源和rest的关系，进行了一番google。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu安装JDK1.7的经历">
-<meta property="og:url" content="http://yoursite.com/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/index.html">
+<meta property="og:title" content="什么是restful接口">
+<meta property="og:url" content="http://yoursite.com/2015/05/21/[Rest]什么是restful接口/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introduction因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。
-最主要的参考资料是这里。
-下载文件中不是在上述网址总下载得到的。是以前在官网下载的。">
+<meta property="og:description" content="Introduction今天宿舍发起了一场“什么事rest接口，rest接口和以往的接口，有什么不同？”的争论。最后由我们伟神进行了权威解答。核心要点是——资源，rest接口是以资源为导向的。为了搞清楚这些问题，同时试图理解资源和rest的关系，进行了一番google。">
+<meta property="og:image" content="http://womenzouba.qiniudn.com/restrestful-api-design-11-638.jpg">
+<meta property="og:image" content="http://womenzouba.qiniudn.com/restrestful-api-design-13-638.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu安装JDK1.7的经历">
-<meta name="twitter:description" content="Introduction因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。
-最主要的参考资料是这里。
-下载文件中不是在上述网址总下载得到的。是以前在官网下载的。">
+<meta name="twitter:title" content="什么是restful接口">
+<meta name="twitter:description" content="Introduction今天宿舍发起了一场“什么事rest接口，rest接口和以往的接口，有什么不同？”的争论。最后由我们伟神进行了权威解答。核心要点是——资源，rest接口是以资源为导向的。为了搞清楚这些问题，同时试图理解资源和rest的关系，进行了一番google。">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -81,14 +77,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/" title="ubuntu安装JDK1.7的经历" itemprop="url">ubuntu安装JDK1.7的经历</a>
+      <a href="/2015/05/21/[Rest]什么是restful接口/" title="什么是restful接口" itemprop="url">什么是restful接口</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2013-12-16T09:09:03.000Z" itemprop="datePublished"> Published 2013-12-16</time>
+    <time datetime="2015-05-20T16:21:51.000Z" itemprop="datePublished"> Published 2015-05-21</time>
     
   </p>
 </header>
@@ -97,25 +93,31 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解压jdk-7u45-linux-i586-tar(1)-gz"><span class="toc-number">2.</span> <span class="toc-text">解压jdk-7u45-linux-i586.tar(1).gz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">3.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Over"><span class="toc-number">4.</span> <span class="toc-text">Over</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Others"><span class="toc-number">5.</span> <span class="toc-text">Others</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源和rest"><span class="toc-number">2.</span> <span class="toc-text">资源和rest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wikipedia"><span class="toc-number">3.</span> <span class="toc-text">wikipedia</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更进一步的理解"><span class="toc-number">4.</span> <span class="toc-text">更进一步的理解</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="Introduction">Introduction</h3><p>因为要学习hadoop，所以向linux下的jdk下了战书，这里只是记录一下过程。</p>
-<p>最主要的参考资料是<a href="http://blog.csdn.net/snowdream86/article/details/6677450" target="_blank" rel="external">这里</a>。</p>
-<p>下载文件中不是在上述网址总下载得到的。是以前在<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">官网</a>下载的。<br><a id="more"></a></p>
-<h3 id="解压jdk-7u45-linux-i586-tar(1)-gz">解压jdk-7u45-linux-i586.tar(1).gz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar zxvf ./jdk-<span class="number">7</span>u45-linux-i586.tar(<span class="number">1</span>).gz</span><br></pre></td></tr></table></figure>
-<p>为方便，修改文件名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv jdk-<span class="number">7</span>u45-linux-i586.tar(<span class="number">1</span>).gz jdk1.<span class="number">7</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="配置环境变量">配置环境变量</h3><p>执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>在打开文件最后，添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk1.<span class="number">7</span></span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<p>保存退出，输入以下命令使之立即生效。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-<h3 id="Over">Over</h3><p>上述参考文章里面还有配置默认JDK版本，由于我是按照那个文章的顺序配置的，所以在配置默认JDK前不知道是否已经配置好，但是觉得应该是这样的：如果只有一个JDK，就不用配置默认的JDK。</p>
-<p>最后，用命令测试JDK是否安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<h3 id="Others">Others</h3><p>这中间也参考了<a href="http://qinshanwu.iteye.com/blog/342916" target="_blank" rel="external">http://qinshanwu.iteye.com/blog/342916</a>这篇文章，主要是vi编辑方面。</p>
+		<h3 id="Introduction">Introduction</h3><p>今天宿舍发起了一场“什么事rest接口，rest接口和以往的接口，有什么不同？”的争论。最后由我们伟神进行了权威解答。核心要点是——资源，rest接口是以资源为导向的。为了搞清楚这些问题，同时试图理解资源和rest的关系，进行了一番google。</p>
+<a id="more"></a>
+<h3 id="资源和rest">资源和rest</h3><p>用google搜索“restful api 設計”，找到阮一峰的文章，里面有这样一篇文章，叫<a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="external">理解RESTful架构</a>.</p>
+<p>好么！！这里就有“资源”一说。一开始就讲到Representational State Transfer的主语是资源。这个上来一看，瞬间就蒙蔽了。不是rest么，和resource有毛关系。</p>
+<p>总之，看完他的文章后，我的理解是：网络软件（也就是网站）之间，或者是网站前后台之间通过直接的请求获得所需资源（也就是URI），这次请求中不包含任何有关表示层的数据。其意思可能是，通过URI与服务器（可能吧）进行交互后，获得资源的同时，也改变了服务器的状态（至于什么状态不明确）。</p>
+<p>另外，关于<a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="external">这边文章</a>后面的误区，完全是在逗我玩。因为这些说法，和他的另外一篇文章<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">RESTful API 设计指南</a>中说到的版本的问题，可以理解是两个不同的意思。下面引用一下，看看。</p>
+<p><a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="external">理解RESTful架构</a>中有：</p>
+<blockquote>
+<p>另一个设计误区，就是在URI中加入版本号：<br>　    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//www.example.com/app/1.0/foo</span></span><br><span class="line">　　http:<span class="comment">//www.example.com/app/1.1/foo</span></span><br><span class="line">　　http:<span class="comment">//www.example.com/app/2.0/foo</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>因为不同的版本，可以理解成同一种资源的不同表现形式，所以应该采用同一个URI。版本号可以在HTTP请求头信息的Accept字段中进行区分（参见Versioning REST Services）：<br>    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Accept: vnd.example-com.foo+json; version=<span class="number">1.0</span></span><br><span class="line">　　Accept: vnd.example-com.foo+json; version=<span class="number">1.1</span></span><br><span class="line">　　Accept: vnd.example-com.foo+json; version=<span class="number">2.0</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">RESTful API 设计指南</a>中有：</p>
+<blockquote>
+<p>三、版本（Versioning）<br>应该将API的版本号放入URL。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//api.example.com/v1/</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>另一种做法是，将版本号放在HTTP头信息中，但不如放入URL方便和直观。Github采用这种做法。</p>
+<h3 id="wikipedia">wikipedia</h3><p>维基百科中的<a href="http://zh.wikipedia.org/wiki/REST" target="_blank" rel="external">REST</a><br>看完后，感觉是这样的：REST是一种软件架构风格。需要客户端与服务器、连接协议无状态性、能够利用Cache增进性能。里面还介绍了REST在web方面的应用。详情继续戳<a href="http://zh.wikipedia.org/wiki/REST" target="_blank" rel="external">REST</a>链接。</p>
+<h3 id="更进一步的理解">更进一步的理解</h3><p>更进一步的理解是在这个<a href="http://www.slideshare.net/AmigoChan/restful-api-design" target="_blank" rel="external">连接</a>发现的.【顺便记住这个ppt分享地址<a href="http://www.slideshare.net/】" target="_blank" rel="external">http://www.slideshare.net/】</a></p>
+<p>下面是上述连接中的两张。</p>
+<p>传统网页流程<br><img src="http://womenzouba.qiniudn.com/restrestful-api-design-11-638.jpg" alt=""><br>api网页工程师的看法<br><img src="http://womenzouba.qiniudn.com/restrestful-api-design-13-638.jpg" alt=""></p>
+<p>还没看完，明天继续。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -123,7 +125,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/tomcat/">tomcat</a>
+  <a class="article-category-link" href="/categories/rest/">rest</a>
 </div>
 
 
@@ -133,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/" data-title="ubuntu安装JDK1.7的经历 | anshome" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/05/21/[Rest]什么是restful接口/" data-title="什么是restful接口 | anshome" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,20 +148,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/05/18/[Other]正则表达式的基础学习网站/" title="正则表达式的基础学习网站">
-  <strong>上一篇：</strong><br/>
-  <span>
-  正则表达式的基础学习网站</span>
+
+<div class="next">
+<a href="/2015/05/16/[Markdown]tutorial/"  title="markdown tutorial">
+ <strong>下一篇：</strong><br/> 
+ <span>markdown tutorial
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/" data-title="ubuntu安装JDK1.7的经历" data-url="http://yoursite.com/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/21/[Rest]什么是restful接口/" data-title="什么是restful接口" data-url="http://yoursite.com/2015/05/21/[Rest]什么是restful接口/"></div>
 </section>
 
 
@@ -169,7 +171,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解压jdk-7u45-linux-i586-tar(1)-gz"><span class="toc-number">2.</span> <span class="toc-text">解压jdk-7u45-linux-i586.tar(1).gz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">3.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Over"><span class="toc-number">4.</span> <span class="toc-text">Over</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Others"><span class="toc-number">5.</span> <span class="toc-text">Others</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源和rest"><span class="toc-number">2.</span> <span class="toc-text">资源和rest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wikipedia"><span class="toc-number">3.</span> <span class="toc-text">wikipedia</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更进一步的理解"><span class="toc-number">4.</span> <span class="toc-text">更进一步的理解</span></a></li></ol>
  
   </div>
 
