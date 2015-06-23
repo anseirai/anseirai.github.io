@@ -4,28 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>static和final的解答|== | anshome</title>
+    <title>java string的字符替换 | anshome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="anseirai">
     
 
     
-    <meta name="description" content="Introduction这些东西，总是看了忘，忘了看，要经常打开看看。
-高手总结《——牢记需要常看
-基本数据类型中‘==’比较是的两者的值。对于对象，比较的是两者的地址。">
+    <meta name="description" content="Introductionleetcode中的word ladder需要对String变量中的某一个字符进行替换，而String对象在java中是不可改变的。这就需要通过新建字符串进行替换。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="static和final的解答|==">
-<meta property="og:url" content="http://yoursite.com/2014/11/06/[Java]static和final的解答/index.html">
+<meta property="og:title" content="java string的字符替换">
+<meta property="og:url" content="http://yoursite.com/2015/06/23/[Java]java string的字符替换/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introduction这些东西，总是看了忘，忘了看，要经常打开看看。
-高手总结《——牢记需要常看
-基本数据类型中‘==’比较是的两者的值。对于对象，比较的是两者的地址。">
+<meta property="og:description" content="Introductionleetcode中的word ladder需要对String变量中的某一个字符进行替换，而String对象在java中是不可改变的。这就需要通过新建字符串进行替换。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="static和final的解答|==">
-<meta name="twitter:description" content="Introduction这些东西，总是看了忘，忘了看，要经常打开看看。
-高手总结《——牢记需要常看
-基本数据类型中‘==’比较是的两者的值。对于对象，比较的是两者的地址。">
+<meta name="twitter:title" content="java string的字符替换">
+<meta name="twitter:description" content="Introductionleetcode中的word ladder需要对String变量中的某一个字符进行替换，而String对象在java中是不可改变的。这就需要通过新建字符串进行替换。">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -81,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/11/06/[Java]static和final的解答/" title="static和final的解答|==" itemprop="url">static和final的解答|==</a>
+      <a href="/2015/06/23/[Java]java string的字符替换/" title="java string的字符替换" itemprop="url">java string的字符替换</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-11-06T07:12:43.000Z" itemprop="datePublished"> 發表於 2014-11-06</time>
+    <time datetime="2015-06-23T08:51:32.000Z" itemprop="datePublished"> 發表於 2015-06-23</time>
     
   </p>
 </header>
@@ -97,14 +91,19 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-number">2.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-number">2.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-number">3.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS"><span class="toc-number">4.</span> <span class="toc-text">PS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">5.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="Introduction">Introduction</h3><p>这些东西，总是看了忘，忘了看，要经常打开看看。</p>
-<p><a href="http://lavasoft.blog.51cto.com/62575/18771/" target="_blank" rel="external"><font size="11">高手总结</font></a>《——牢记需要常看</p>
-<p><font size="5" color="ff0000">基本数据</font>类型中‘==’比较是的两者的值。对于对象，比较的是两者的<font size="5" color="ff0000">地址</font>。</p>
-<a id="more"></a>  
+		<h4 id="Introduction">Introduction</h4><p>leetcode中的word ladder需要对<code>String</code>变量中的某一个字符进行替换，而<code>String</code>对象在java中是不可改变的。这就需要通过新建字符串进行替换。<br><a id="more"></a></p>
+<h4 id="解决方法">解决方法</h4><h5 id="方法一">方法一</h5><p>可以使用substring方法，截取原有<code>String</code>，再拼接起来。例如如下代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line">String newString2 = strCurrent.substring(<span class="number">0</span>,i) + c + strCurrent.substring(i + <span class="number">1</span>);</span><br><span class="line"><span class="comment">//result: newString2 == zhclsihigeyige</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="方法二">方法二</h5><p><code>String</code>转换成<code>char</code>数组，替换后再新建。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line"><span class="keyword">char</span>[] chars = strCurrent.toCharArray();</span><br><span class="line">chars[i] = c;</span><br><span class="line">String newString1 = <span class="keyword">new</span> String(chars);</span><br><span class="line"><span class="comment">//result: newString2 == zhclsihigeyige</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="问题">问题</h4><p><font size="10">但是</font>在<a href="https://leetcode.com/problems/word-ladder/" target="_blank" rel="external">word ladder题目</a>中,<a href="https://leetcode.com/submissions/detail/30878491/" target="_blank" rel="external">方法一</a>总是超时，<a href="https://leetcode.com/submissions/detail/30912164/" target="_blank" rel="external">方法二</a>却能通过，如此一来，可能是方法一的用时过长。</p>
+<p>为测试用时时长，需要利用时间函数，根据测试，时间精确到毫秒，不能检测出其差距，需要更加精准的时间函数，因此选择<code>System.nanoTime()</code>来获取纳秒时间，有如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line"><span class="keyword">long</span> time1begin  = System.nanoTime();</span><br><span class="line"><span class="keyword">char</span>[] chars = strCurrent.toCharArray();</span><br><span class="line">chars[i] = c;</span><br><span class="line">String newString1 = <span class="keyword">new</span> String(chars);</span><br><span class="line"><span class="keyword">long</span> time1end  = System.nanoTime();</span><br><span class="line">System.out.println(newString1);</span><br><span class="line">System.out.println(time1end - time1begin);</span><br><span class="line"><span class="keyword">long</span> time2begin  = System.nanoTime();</span><br><span class="line">String newString2 = strCurrent.substring(<span class="number">0</span>,i) + c + strCurrent.substring(i + <span class="number">1</span>);</span><br><span class="line"><span class="keyword">long</span> time2end  = System.nanoTime();</span><br><span class="line">System.out.println(newString2);</span><br><span class="line">System.out.println(time2end - time2begin);</span><br><span class="line"><span class="javadoc">/**</span><br><span class="line">*zhclsihigeyige</span><br><span class="line">*11794</span><br><span class="line">*zhclsihigeyige</span><br><span class="line">*70483</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure>
+<p>可见方法二的时间在纳秒级别上比方法一要快很6倍左右。</p>
+<h4 id="PS">PS</h4><p><code>System.currentTimeMillis()</code>获取的时间精度不一定是1ms，这需要根据具体的机器来判断。原因见<a href="http://blog.csdn.net/elky1982/article/details/4677365" target="_blank" rel="external">文章链接</a>.</p>
+<h4 id="OVER">OVER</h4>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -121,7 +120,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2014/11/06/[Java]static和final的解答/" data-title="static和final的解答|== | anshome" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/06/23/[Java]java string的字符替换/" data-title="java string的字符替换 | anshome" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,19 +133,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/11/11/[Java]java流的概念/" title="java流的概念">
-  <strong>上一篇：</strong><br/>
-  <span>
-  java流的概念</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/10/29/[Other]反向代理服务器和前向代理服务器/"  title="反向代理服务器和前向代理服务器">
+<a href="/2015/05/21/[Rest]什么是restful接口/"  title="什么是restful接口">
  <strong>下一篇：</strong><br/> 
- <span>反向代理服务器和前向代理服务器
+ <span>什么是restful接口
 </span>
 </a>
 </div>
@@ -155,7 +146,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2014/11/06/[Java]static和final的解答/" data-title="static和final的解答|==" data-url="http://yoursite.com/2014/11/06/[Java]static和final的解答/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/23/[Java]java string的字符替换/" data-title="java string的字符替换" data-url="http://yoursite.com/2015/06/23/[Java]java string的字符替换/"></div>
 </section>
 
 
@@ -165,7 +156,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-number">2.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-number">2.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-number">3.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS"><span class="toc-number">4.</span> <span class="toc-text">PS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">5.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
