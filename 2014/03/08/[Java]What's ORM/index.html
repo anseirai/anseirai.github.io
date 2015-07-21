@@ -11,15 +11,21 @@
     
 
     
-    <meta name="description" content="Introduction如题，本文将要介绍String、StringBuffer以及StringBuilder的区别。首先要申明的是，他们的区别不大。">
+    <meta name="description" content="Introduction什么是ORM，引用wikipedia
+
+Object-relational mapping (ORM, O/RM, and O/R mapping)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="What's ORM">
-<meta property="og:url" content="http://yoursite.com/2013/12/25/[Java]What's ORM/index.html">
+<meta property="og:url" content="http://yoursite.com/2014/03/08/[Java]What's ORM/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introduction如题，本文将要介绍String、StringBuffer以及StringBuilder的区别。首先要申明的是，他们的区别不大。">
+<meta property="og:description" content="Introduction什么是ORM，引用wikipedia
+
+Object-relational mapping (ORM, O/RM, and O/R mapping)">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="What's ORM">
-<meta name="twitter:description" content="Introduction如题，本文将要介绍String、StringBuffer以及StringBuilder的区别。首先要申明的是，他们的区别不大。">
+<meta name="twitter:description" content="Introduction什么是ORM，引用wikipedia
+
+Object-relational mapping (ORM, O/RM, and O/R mapping)">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -75,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/12/25/[Java]What's ORM/" title="What&#39;s ORM" itemprop="url">What&#39;s ORM</a>
+      <a href="/2014/03/08/[Java]What's ORM/" title="What&#39;s ORM" itemprop="url">What&#39;s ORM</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2013-12-25T01:51:32.000Z" itemprop="datePublished"> 發表於 2013-12-25</time>
+    <time datetime="2014-03-08T06:23:32.000Z" itemprop="datePublished"> 發表於 2014-03-08</time>
     
   </p>
 </header>
@@ -91,51 +97,32 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String"><span class="toc-number">2.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-number">3.</span> <span class="toc-text">StringBuffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuilder"><span class="toc-number">4.</span> <span class="toc-text">StringBuilder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久化"><span class="toc-number">3.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系型数据库"><span class="toc-number">4.</span> <span class="toc-text">关系型数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Oject-Relational_Impedance_Mismatch"><span class="toc-number">5.</span> <span class="toc-text">Oject-Relational Impedance Mismatch</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#颗粒度（Granularity）"><span class="toc-number">5.1.</span> <span class="toc-text">颗粒度（Granularity）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子类（Subtypes_[inheritance]）"><span class="toc-number">5.2.</span> <span class="toc-text">子类（Subtypes [inheritance]）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Identity"><span class="toc-number">5.3.</span> <span class="toc-text">Identity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关联（Association）"><span class="toc-number">5.4.</span> <span class="toc-text">关联（Association）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据导航（Data_navigation）"><span class="toc-number">5.5.</span> <span class="toc-text">数据导航（Data navigation）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
 		</div>
 		
-		<h4 id="Introduction">Introduction</h4><p>如题，本文将要介绍<code>String</code>、<code>StringBuffer</code>以及<code>StringBuilder</code>的区别。首先要申明的是，他们的区别不大。<br><a id="more"></a></p>
-<h4 id="String">String</h4><p>String是一个不变对象（immutable[一旦创建不可以改变]）<br>创建的String对象被保存在常量池中（Constant String Pool）<br>像String这样的不可变对象都是现成安全的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String  demo = <span class="string">" hello "</span> ;</span><br><span class="line"><span class="comment">// “hello”对象存储在常量池，该对象不可修改</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">demo=<span class="string">"Bye"</span> ;<span class="comment">//新的String对象“Bye”也保存在常量池中，demo指向这个新建的变量          </span></span><br><span class="line"> <span class="comment">// String对象“hello”在常量池中仍然存在，他的值没有被覆盖，只是我们丢失了指向他的变量罢了。</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="StringBuffer">StringBuffer</h4><p>StringBuffer是可变的意思是：可以改变该对象的值。<br>StringBuffer对象呗保存在堆中（heap）<br>每个StringBuffer的方法都是synchronized<br>StringBuffer是线程安全的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer demo1 = <span class="keyword">new</span> StringBuffer(<span class="string">"Hello"</span>) ;</span><br><span class="line"><span class="comment">// 以上对象被保存在堆中，能够修改他的值。</span></span><br><span class="line">demo1=<span class="keyword">new</span> StringBuffer(<span class="string">"Bye"</span>);</span><br><span class="line"><span class="comment">// 上述语句修改了demo1的值。demo1中的原值“Hello”被替换</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="StringBuilder">StringBuilder</h4><p>StringBuilder基本和StringBuffer相同。主要区别就是StringBuilder是不是线程安全的；正由于他不是是线程安全的，所以速度要比StringBuffer要快。</p>
-<h4 id="总结">总结</h4><table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">String</th>
-<th style="text-align:center">StringBuffer</th>
-<th style="text-align:center">StringBuilder</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>存储区域</strong></td>
-<td style="text-align:center">常量池</td>
-<td style="text-align:center">堆</td>
-<td style="text-align:center">堆</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>是否可修改</strong></td>
-<td style="text-align:center">不可修改</td>
-<td style="text-align:center">可修改</td>
-<td style="text-align:center">可修改</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>线程安全</strong></td>
-<td style="text-align:center">安全</td>
-<td style="text-align:center">安全</td>
-<td style="text-align:center">不安全</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>表现</strong></td>
-<td style="text-align:center">快</td>
-<td style="text-align:center">慢</td>
-<td style="text-align:center">快</td>
-</tr>
-</tbody>
-</table>
-<h4 id="参考链接">参考链接</h4><p>原文见链接<a href="http://javahungry.blogspot.com/2013/06/difference-between-string-stringbuilder.html" target="_blank" rel="external">http://javahungry.blogspot.com/2013/06/difference-between-string-stringbuilder.html</a></p>
+		<h4 id="Introduction">Introduction</h4><p>什么是<a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="external">ORM，引用wikipedia</a></p>
+<blockquote>
+<p>Object-relational mapping (ORM, O/RM, and O/R mapping)</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="概述">概述</h4><p>在计算机学科中，他是用来在不兼容的系统类型（incompatible type systems）和面向对象的编程语言(object-oriented programming laguages)之间进行数据转化(converting data)的一种编程技术。</p>
+<p>在面向对象的程序设计中，数据管理任务往往以对象实现，这些对象往往不是纯数字的值。</p>
+<p>而常用的数据库只能以表的结构存储基本类型，例如：整形和字符串等。</p>
+<p>所以，程序员要么把对象转换成一组基本类型的数据，以便数据库存储；要么在程序中就使用基本类型数据。ORM就是第一种实现方法。</p>
+<p>核心问题是：将逻辑对象转换为可存储的原子形式，同时保护对象属性以及他们之间的关系，以便在需要时恢复成对象。 如果这种<code>存储</code>和<code>重组</code>功能实现的话，对象就可以说是能够被<code>持久化</code>了</p>
+<h4 id="持久化">持久化</h4><p>所谓持久化就是，你希望数据存活范围超过程序本身。对于java来说，就是数据存储于JVM以外，以便后溪重新获取这些数据。</p>
+<h4 id="关系型数据库">关系型数据库</h4><p>ORM主要面向的是关系型数据库（RDBMS），尽管在面向对象技术中，和关系数据库对应的是面向对象的数据库（object database：ODBMS）。但是在可预见的未来，关系数据库仍旧占据着一席之地。</p>
+<h4 id="Oject-Relational_Impedance_Mismatch">Oject-Relational Impedance Mismatch</h4><p>有时也称作paradigm mismatch。是对象模型和关系模型不能良好匹配的一种说法。RDBMS使用表结构表示数据，而像java这种面向对象语言使用对象及其关系进行表示。在关系数据库中存储和获取这些对象和它们的关系会遇到五个问题：（还没看懂，详情参考<a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="external">原文</a>）</p>
+<h5 id="颗粒度（Granularity）">颗粒度（Granularity）</h5><p>有时一个对象模型对应的类要比数据库中相应的表要多得多。</p>
+<h5 id="子类（Subtypes_[inheritance]）">子类（Subtypes [inheritance]）</h5><p>在面向对象语言中很常见。但是RDBMS没有相应的支持。</p>
+<h5 id="Identity">Identity</h5><p>RDBMS定义了千篇一律的的概念：主键。而java中既有唯一概念又有相等概念。</p>
+<h5 id="关联（Association）">关联（Association）</h5><p>面向对象语言中的关系并不直接。而RDBMS中直接使用外检进行说明。</p>
+<h5 id="数据导航（Data_navigation）">数据导航（Data navigation）</h5><p>在java中，可以根据对象关联根据一个对象找到另一个对象。而在数据库中，是使用尽量少的SQL语句和JOINs，然后从中获得所需对象。</p>
+<h4 id="参考链接">参考链接</h4><ul>
+<li><a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="external">https://en.wikipedia.org/wiki/Object-relational_mapping</a></li>
+<li><a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="external">http://hibernate.org/orm/what-is-an-orm/</a></li>
+</ul>
 <h4 id="OVER">OVER</h4>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -153,7 +140,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2013/12/25/[Java]What's ORM/" data-title="What&#39;s ORM | anshome" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2014/03/08/[Java]What's ORM/" data-title="What&#39;s ORM | anshome" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -167,18 +154,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2013/12/25/[Java]String StringBuffer StringBuilder区别/" title="String StringBuffer StringBuilder区别">
+ <a href="/2014/03/16/[Error]tomcat启动报错/" title="tomcat启动nested错误">
   <strong>上一篇：</strong><br/>
   <span>
-  String StringBuffer StringBuilder区别</span>
+  tomcat启动nested错误</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2013/12/16/[Jdk]ubuntu安装JDK1.7的经历/"  title="ubuntu安装JDK1.7的经历">
+<a href="/2013/12/25/[Java]String StringBuffer StringBuilder区别/"  title="String StringBuffer StringBuilder区别">
  <strong>下一篇：</strong><br/> 
- <span>ubuntu安装JDK1.7的经历
+ <span>String StringBuffer StringBuilder区别
 </span>
 </a>
 </div>
@@ -187,7 +174,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2013/12/25/[Java]What's ORM/" data-title="What's ORM" data-url="http://yoursite.com/2013/12/25/[Java]What's ORM/"></div>
+	<div class="ds-thread" data-thread-key="2014/03/08/[Java]What's ORM/" data-title="What's ORM" data-url="http://yoursite.com/2014/03/08/[Java]What's ORM/"></div>
 </section>
 
 
@@ -197,7 +184,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String"><span class="toc-number">2.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-number">3.</span> <span class="toc-text">StringBuffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuilder"><span class="toc-number">4.</span> <span class="toc-text">StringBuilder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久化"><span class="toc-number">3.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系型数据库"><span class="toc-number">4.</span> <span class="toc-text">关系型数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Oject-Relational_Impedance_Mismatch"><span class="toc-number">5.</span> <span class="toc-text">Oject-Relational Impedance Mismatch</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#颗粒度（Granularity）"><span class="toc-number">5.1.</span> <span class="toc-text">颗粒度（Granularity）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子类（Subtypes_[inheritance]）"><span class="toc-number">5.2.</span> <span class="toc-text">子类（Subtypes [inheritance]）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Identity"><span class="toc-number">5.3.</span> <span class="toc-text">Identity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关联（Association）"><span class="toc-number">5.4.</span> <span class="toc-text">关联（Association）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据导航（Data_navigation）"><span class="toc-number">5.5.</span> <span class="toc-text">数据导航（Data navigation）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
