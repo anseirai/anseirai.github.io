@@ -46,7 +46,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -62,7 +62,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -85,14 +85,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-12-15T06:33:01.000Z" itemprop="datePublished"> 發表於 2014-12-15</time>
+    <time datetime="2014-12-15T06:33:01.000Z" itemprop="datePublished"> Published 2014-12-15</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#(一)_AUTO_INCREMENT说明："><span class="toc-number">2.</span> <span class="toc-text">(一) AUTO_INCREMENT说明：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-指定的自增列，即指定了AUTO_INCREMENT的列必需建立索引。索引可以是主键索引，也可以是非主键索引；"><span class="toc-number">2.1.</span> <span class="toc-text">1.指定的自增列，即指定了AUTO_INCREMENT的列必需建立索引。索引可以是主键索引，也可以是非主键索引；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-插入新记录，如果为AUTO_INCREMENT字段明确指定了一个数值；或者使用语句ALTER_TABLE_tableb_AUTO_INCREMENT=20;重置AUTO_INCREMENT时；会出现两种情况："><span class="toc-number">2.2.</span> <span class="toc-text">2.插入新记录，如果为AUTO_INCREMENT字段明确指定了一个数值；或者使用语句ALTER TABLE tableb AUTO_INCREMENT=20;重置AUTO_INCREMENT时；会出现两种情况：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-被DELETE语句删除的id值，以后可以强制插入，但是不会影响自增的过程；"><span class="toc-number">2.3.</span> <span class="toc-text">3.被DELETE语句删除的id值，以后可以强制插入，但是不会影响自增的过程；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-DELETE_FROM_table_name语句执行后，不会引起AUTO_INCREMENT的变化"><span class="toc-number">2.4.</span> <span class="toc-text">4.DELETE FROM table_name语句执行后，不会引起AUTO_INCREMENT的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-重置AUTO_INCREMENT的值需要使用TRUNCATE_TABLE_table_name，注意，此操作会删除所有数据。"><span class="toc-number">2.5.</span> <span class="toc-text">5.重置AUTO_INCREMENT的值需要使用TRUNCATE TABLE table_name，注意，此操作会删除所有数据。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#(二)_Mysql实现id奇数或偶数，或者自定义（auto_increment_increment_&auto_increment_offset_说明）"><span class="toc-number">3.</span> <span class="toc-text">(二) Mysql实现id奇数或偶数，或者自定义（auto_increment_increment &auto_increment_offset 说明）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-含义："><span class="toc-number">3.1.</span> <span class="toc-text">1.含义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-例子："><span class="toc-number">3.2.</span> <span class="toc-text">2.例子：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-查看当前参数值。"><span class="toc-number">3.3.</span> <span class="toc-text">3.查看当前参数值。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-设置参数值："><span class="toc-number">3.4.</span> <span class="toc-text">4.设置参数值：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#(三)_MYSQL_SHOW_语句说明："><span class="toc-number">4.</span> <span class="toc-text">(三) MYSQL SHOW 语句说明：</span></a></li></ol>
 		
@@ -167,22 +167,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#(一)_AUTO_INCREMENT说明："><span class="toc-number">2.</span> <span class="toc-text">(一) AUTO_INCREMENT说明：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-指定的自增列，即指定了AUTO_INCREMENT的列必需建立索引。索引可以是主键索引，也可以是非主键索引；"><span class="toc-number">2.1.</span> <span class="toc-text">1.指定的自增列，即指定了AUTO_INCREMENT的列必需建立索引。索引可以是主键索引，也可以是非主键索引；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-插入新记录，如果为AUTO_INCREMENT字段明确指定了一个数值；或者使用语句ALTER_TABLE_tableb_AUTO_INCREMENT=20;重置AUTO_INCREMENT时；会出现两种情况："><span class="toc-number">2.2.</span> <span class="toc-text">2.插入新记录，如果为AUTO_INCREMENT字段明确指定了一个数值；或者使用语句ALTER TABLE tableb AUTO_INCREMENT=20;重置AUTO_INCREMENT时；会出现两种情况：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-被DELETE语句删除的id值，以后可以强制插入，但是不会影响自增的过程；"><span class="toc-number">2.3.</span> <span class="toc-text">3.被DELETE语句删除的id值，以后可以强制插入，但是不会影响自增的过程；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-DELETE_FROM_table_name语句执行后，不会引起AUTO_INCREMENT的变化"><span class="toc-number">2.4.</span> <span class="toc-text">4.DELETE FROM table_name语句执行后，不会引起AUTO_INCREMENT的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-重置AUTO_INCREMENT的值需要使用TRUNCATE_TABLE_table_name，注意，此操作会删除所有数据。"><span class="toc-number">2.5.</span> <span class="toc-text">5.重置AUTO_INCREMENT的值需要使用TRUNCATE TABLE table_name，注意，此操作会删除所有数据。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#(二)_Mysql实现id奇数或偶数，或者自定义（auto_increment_increment_&auto_increment_offset_说明）"><span class="toc-number">3.</span> <span class="toc-text">(二) Mysql实现id奇数或偶数，或者自定义（auto_increment_increment &auto_increment_offset 说明）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-含义："><span class="toc-number">3.1.</span> <span class="toc-text">1.含义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-例子："><span class="toc-number">3.2.</span> <span class="toc-text">2.例子：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-查看当前参数值。"><span class="toc-number">3.3.</span> <span class="toc-text">3.查看当前参数值。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-设置参数值："><span class="toc-number">3.4.</span> <span class="toc-text">4.设置参数值：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#(三)_MYSQL_SHOW_语句说明："><span class="toc-number">4.</span> <span class="toc-text">(三) MYSQL SHOW 语句说明：</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -244,7 +244,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -266,7 +266,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -470,7 +470,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
