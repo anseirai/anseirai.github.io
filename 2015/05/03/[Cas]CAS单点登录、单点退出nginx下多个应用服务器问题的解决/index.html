@@ -1,0 +1,501 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CAS单点登录、单点退出|nginx下多个应用服务器问题的解决 | anshome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="anseirai">
+    
+
+    
+    <meta name="description" content="背景
+系统内有多个应用，例如：admin、callcenter、frontweb、phone等，每个应用有多个运行的实例，例如：admin1、admin2、frontweb1、frontweb2、frontweb3等。同一个应用的实例可能分布在不同的实体机器上，也可能在相同的机器上，每一个实例就是一个tomcat。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决">
+<meta property="og:url" content="http://yoursite.com/2015/05/03/[Cas]CAS单点登录、单点退出nginx下多个应用服务器问题的解决/index.html">
+<meta property="og:site_name" content="anshome">
+<meta property="og:description" content="背景
+系统内有多个应用，例如：admin、callcenter、frontweb、phone等，每个应用有多个运行的实例，例如：admin1、admin2、frontweb1、frontweb2、frontweb3等。同一个应用的实例可能分布在不同的实体机器上，也可能在相同的机器上，每一个实例就是一个tomcat。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决">
+<meta name="twitter:description" content="背景
+系统内有多个应用，例如：admin、callcenter、frontweb、phone等，每个应用有多个运行的实例，例如：admin1、admin2、frontweb1、frontweb2、frontweb3等。同一个应用的实例可能分布在不同的实体机器上，也可能在相同的机器上，每一个实例就是一个tomcat。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/03/[Cas]CAS单点登录、单点退出nginx下多个应用服务器问题的解决/" title="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决" itemprop="url">CAS单点登录、单点退出|nginx下多个应用服务器问题的解决</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-03T15:14:45.000Z" itemprop="datePublished"> Published 2015-05-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遇到的问题"><span class="toc-number">2.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题原因"><span class="toc-number">3.</span> <span class="toc-text">问题原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAS单点登出原理和解决办法"><span class="toc-number">4.</span> <span class="toc-text">CAS单点登出原理和解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以下从代码角度进行分析"><span class="toc-number">5.</span> <span class="toc-text">以下从代码角度进行分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#But"><span class="toc-number"></span> <span class="toc-text">But</span></a>
+		
+		</div>
+		
+		<h3 id="背景">背景</h3><hr>
+<p>系统内有多个应用，例如：admin、callcenter、frontweb、phone等，每个应用有多个运行的实例，例如：admin1、admin2、frontweb1、frontweb2、frontweb3等。同一个应用的实例可能分布在不同的实体机器上，也可能在相同的机器上，每一个实例就是一个tomcat。<a id="more"></a>但是，所有访问必须先通过nginx，由它决定最终要访问哪个tomcat。</p>
+<p>现在，要增加单点登录和单点退出的功能，即在一个应用上登录后，在其他应用不需要重复登录了。</p>
+<h3 id="遇到的问题">遇到的问题</h3><hr>
+<p>按照网上的大多数流程配置完成后，在本地调试可以正常运行，也看不出什么问题，因为本地没有多个应用的实例，并且本地也没有配置nginx。</p>
+<p>但是在真实环境下，有多个admin和多个callcenter应用实例，单点登录没问题，但是当用户在admin退出后，之前登录的callcenter依旧可以正常使用，出问题了。</p>
+<h3 id="问题原因">问题原因</h3><hr>
+<p>经查实，原因出在logout时，由于nginx的存在，cas服务器发送的单点退出请求，没有经过nginx的转发到达用户登录的callcenter服务器上，而nginx也不确定这个请求应该转发到哪一台服务器上。所以退出失败。</p>
+<h3 id="CAS单点登出原理和解决办法">CAS单点登出原理和解决办法</h3><hr>
+<p>用户在登录admin时，会在CAS服务器使用该域名注册，以表示该用户在admin已经登录。同理，同一用户同一浏览器在登录callcenter时，也会在CAS服务器注册。当用户在其中一点退出后，CAS服务器会向在它上面注册过的所有应用发送退出请求。</p>
+<p>访问应用时，使用域名访问，通过nginx，但是注册<br>时使用应用所在的ip和端口号。退出请求也要使用ip和端口号，不通过nginx。</p>
+<h3 id="以下从代码角度进行分析">以下从代码角度进行分析</h3><hr>
+<p>Login flow(I mean the”login-webflow.xml”) does not contain all the login process. It onlyinclude the step where the browser is redirected to app with ST. BUT the STcheck URL    can’t be found in thelogin-webflow.xml. So refer to “cas-servlet.xml” which involved allthe beans CAS used.</p>
+<p>在原始ServiceProperties中service参数是通过xml文件配置的。如果用以域名为开头的URL作为service参数。并且系统中每个应用有两个实例（每个实例可以看做是一个Tomcat），且这些应用是被放在nginx后面，每次访问都会经由nginx判断，从而最终选择那台服务器作为真正使用的服务器。理想的逻辑结构如下图。</p>
+<p>这样的架构对于单点登录没有影响，但是想要实现单点退出，却是要费一番脑经的。按照已有的架构，当用户在多个应用登陆成功时，每个应用都在CAS服务器进行注册。此时用户想要退出，需要在一个应用点击退出按钮，则该应用的所在的实例的session被销毁，并且将浏览器重定向到CAS服务器，通知CAS进行退出操作，待CAS完成退出操作后，就会向已经在CAS服务器注册过的每个应用发送退出请求，每个应用拦截该请求，完成退出登陆操作。<br>等等，让我们在回到“CAS服务器向注册过的每个应用发送退出请求”这一步，针对现有架构，每一次访问都经过nginx，所以，CAS服务器在向每一个应用发送退出请求时，也是使用域名实现的，但是当nginx遇到以域名为开头的退出请求时，他不能准确指出，这个请求该发给哪个实例，不该发给哪个实例。因为，根据nginx的判断配置来看，是根据随请求携带的session来判断请求的转发目标的，而登录的时候，用户是通过浏览器访问应用的，但此时，访问该应用的是CAS服务器，所以，nginx不能准确判断该请求的转发目标，所以，单点退出失败。</p>
+<p>究其原因，是由登录流程引起的。从网上可以找到CAS单点登录的协作图，如下：<br>在实际操作中，可能是因为代码的版本问题（具体情况不明确），针对上图做了一些修改，如下。<br>logout时，CAS发出的请求的路径是在登录流程中设置的。研究代码，debug跟踪后，可以了解到改地址就是登录流程中的service参数。其设置是在第一次访问应用，并且重定向到CAS login界面时确定的|其设置实在用户输入用户名密码登陆成功后产生的|是在用户验证ST时，通过request产生的。<br>针对以上描述情况，给ServiceProperties的service参数直接配置以域名开头的URL，不能解决单点退出。试想，如果不适用nginx，是不是就可以解决问题，把service URL中的域名改为真实的ip和端口号，以解决单点退出的问题。但是考虑到上图步骤3处，service地址需要重定向，局域网地址浏览器不能正常访问，所以获取tomcat的真实ip和端口号当做service参数的一部分。于是有了下图结构。<br>这样设置时可以正常工作的，因为在步骤二时记录的service地址是ip和端口号，所以在logout时，CAS发出的请求不会通过nginx，直接根据ip和端口号进行访问。但是由于步骤3重定向地址是ip地址，所以登录成功后，用户浏览器地址栏也是ip和端口，美观不说还影响安全。此方案不可行。</p>
+<h1 id="But">But</h1><p>试想是否可以让步骤3和logout时CAS请求的地址不同，比如，步骤三的地址使用域名，而logout时CAS请求的地址ip和端口号，而且对于CAS来说，其它应用在局域网内，这样就解决了问题。于是在上图的情况下稍微做些修改。<br>根据协作图可知，步骤二的重定向地址由casEntryPoint也就是默认配置中的<code>CasAuthenticationEntryPoint</code>类进行计算得出,要想让CAS同时了解域名和ip，就必需在重定向地址中增加参数。为此继承<code>CasAuthenticationEntryPoint</code>而得<code>CasTargetUrlAuthenticationEntryPoint</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxxx.webapp.common.security.cas;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.net.URLEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.cas.web.CasAuthenticationEntryPoint;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> com.xxxxx.framework.common.log.Log;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CasTargetUrlAuthenticationEntryPoint</span> <span class="keyword">extends</span></span><br><span class="line">        <span class="title">CasAuthenticationEntryPoint</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Log LOG = Log.getLog(CasTargetUrlAuthenticationEntryPoint.class);</span><br><span class="line">     </span><br><span class="line">    <span class="comment">// targetUrl 代表用户访问的域名</span></span><br><span class="line">    <span class="keyword">private</span> String targetUrl;</span><br><span class="line"> </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> String <span class="title">createRedirectUrl</span><span class="params">(String serviceUrl)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        sb.append(targetUrl).append(<span class="string">"/"</span>).append(((CasServiceProperties)getServiceProperties()).getFilterProcessesUrl());</span><br><span class="line">         </span><br><span class="line">        String encodedOtherParameterValue = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            encodedOtherParameterValue = URLEncoder.encode(sb.toString(), <span class="string">"UTF-8"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">"Cas login redirect url encode failed"</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        String redirectUrl = <span class="keyword">super</span>.createRedirectUrl(serviceUrl);</span><br><span class="line">        StringBuffer redirectUrlsb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        redirectUrlsb.append(redirectUrl).append(<span class="string">"&amp;"</span>).append(<span class="string">"targetUrl"</span>).append(<span class="string">"="</span>).append(encodedOtherParameterValue);</span><br><span class="line">         </span><br><span class="line">        redirectUrl = redirectUrlsb.toString();</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">return</span> redirectUrl;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTargetUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> targetUrl;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTargetUrl</span><span class="params">(String targetUrl)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.targetUrl = targetUrl;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了能让ip和端口号自动获取，所以<code>ServiceProperties</code>中的service参数不能用配置文件配置，所以继承<code>ServiceProperties</code>而得 <code>CasServiceProperties</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxxxx.webapp.common.security.cas;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.management.ManagementFactory;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.NetworkInterface;</span><br><span class="line"><span class="keyword">import</span> java.net.SocketException;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> javax.management.AttributeNotFoundException;</span><br><span class="line"><span class="keyword">import</span> javax.management.InstanceNotFoundException;</span><br><span class="line"><span class="keyword">import</span> javax.management.MBeanException;</span><br><span class="line"><span class="keyword">import</span> javax.management.MBeanServer;</span><br><span class="line"><span class="keyword">import</span> javax.management.MalformedObjectNameException;</span><br><span class="line"><span class="keyword">import</span> javax.management.ObjectName;</span><br><span class="line"><span class="keyword">import</span> javax.management.Query;</span><br><span class="line"><span class="keyword">import</span> javax.management.ReflectionException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.cas.ServiceProperties;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> com.xxxxx.framework.common.log.Log;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CasServiceProperties</span> <span class="keyword">extends</span> <span class="title">ServiceProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Log LOG = Log.getLog(CasServiceProperties.class);</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String DEFAULT_LOCAL_IP = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String filterProcessesUrl;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CasServiceProperties</span><span class="params">(String filterProcessesUrl)</span> <span class="keyword">throws</span> MalformedObjectNameException, NullPointerException,</span><br><span class="line">        UnknownHostException, AttributeNotFoundException, InstanceNotFoundException,</span><br><span class="line">        MBeanException, ReflectionException, SocketException </span>&#123;</span><br><span class="line">         </span><br><span class="line">        MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();</span><br><span class="line">        Set&lt;ObjectName&gt; objs = mbs.queryNames(<span class="keyword">new</span> ObjectName(<span class="string">"*:type=Connector,*"</span>),</span><br><span class="line">                Query.match(Query.attr(<span class="string">"protocol"</span>), Query.value(<span class="string">"HTTP/1.1"</span>)));</span><br><span class="line">        LOG.debug(<span class="string">"Objs size : &#123;&#125;"</span>, objs.size());</span><br><span class="line">         </span><br><span class="line">        String port = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (Iterator&lt;ObjectName&gt; i = objs.iterator(); i.hasNext(); ) &#123;</span><br><span class="line">            ObjectName obj = i.next();</span><br><span class="line">            port = obj.getKeyProperty(<span class="string">"port"</span>);</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(port)) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        Enumeration&lt;NetworkInterface&gt; networkInterfaces = NetworkInterface.getNetworkInterfaces();</span><br><span class="line">        String tomcatIp = DEFAULT_LOCAL_IP;</span><br><span class="line">        <span class="keyword">while</span> (networkInterfaces.hasMoreElements()) &#123;</span><br><span class="line">            NetworkInterface networkInterface = (NetworkInterface) networkInterfaces.nextElement();</span><br><span class="line">            Enumeration&lt;InetAddress&gt; inetAddresses = networkInterface.getInetAddresses();</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">while</span> (inetAddresses.hasMoreElements()) &#123;</span><br><span class="line">                InetAddress inetAddress = (InetAddress) inetAddresses.nextElement();</span><br><span class="line">                 </span><br><span class="line">                <span class="keyword">if</span> (inetAddress.isSiteLocalAddress()) &#123;</span><br><span class="line">                    tomcatIp = inetAddress.getHostAddress();</span><br><span class="line">                    LOG.debug(<span class="string">"Web server ip : &#123;&#125;."</span>, tomcatIp);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">this</span>.filterProcessesUrl = filterProcessesUrl;</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        sb.append(<span class="string">"http://"</span>).append(tomcatIp).append(<span class="string">":"</span>).append(port).append(<span class="string">"/"</span>)</span><br><span class="line">            .append(filterProcessesUrl);</span><br><span class="line">         </span><br><span class="line">        String finalServceUrl = sb.toString();</span><br><span class="line">        LOG.debug(<span class="string">"Service url : &#123;&#125;"</span>, finalServceUrl);</span><br><span class="line">         </span><br><span class="line">        setService(finalServceUrl);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFilterProcessesUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> filterProcessesUrl;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终的CAS Client的配置文件如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">&lt;security:global-method-security /&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;security:http auto-config="true"</span><br><span class="line">        entry-point-ref="casEntryPoint"</span><br><span class="line">        access-denied-page="/403.jsp"</span><br><span class="line">        use-expressions="true"</span><br><span class="line">        access-decision-manager-ref="accessDecisionManager"&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;security:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/&gt;</span><br><span class="line">        &lt;security:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/&gt;</span><br><span class="line">        &lt;security:custom-filter ref="casProcessingFilter" position="CAS_FILTER" /&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;security:intercept-url pattern="/assets/**" access="permitAll" /&gt;</span><br><span class="line">        &lt;security:intercept-url pattern="/debug/**" access="permitAll" /&gt;</span><br><span class="line">        &lt;security:intercept-url pattern="/favicon.ico" access="permitAll" /&gt;</span><br><span class="line">        &lt;security:intercept-url pattern="/LogServlet" access="permitAll" /&gt;</span><br><span class="line">        &lt;security:intercept-url pattern="/security/**" access="permitAll" /&gt;</span><br><span class="line">        &lt;security:intercept-url pattern="/services/rs/**" access="permitAll" /&gt;</span><br><span class="line">        &lt;security:intercept-url pattern="/**" access="isAuthenticated()" /&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;security:logout logout-url="/security/logout.html" invalidate-session="false"  success-handler-ref="logoutSuccessHandler"/&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;security:session-management</span><br><span class="line">            session-fixation-protection="none" /&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;!-- if enabled org.springframework.security.web.session.HttpSessionEventPublisher must be added into web.xml --&gt;</span><br><span class="line">        &lt;security:session-management&gt;</span><br><span class="line">            &lt;security:concurrency-control max-sessions="1"</span><br><span class="line">                error-if-maximum-exceeded="true" /&gt;</span><br><span class="line">        &lt;/security:session-management&gt;</span><br><span class="line">         </span><br><span class="line">    &lt;/security:http&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;!-- This filter redirects to the CAS Server to signal Single Logout should be performed --&gt;</span><br><span class="line">    &lt;bean id="requestSingleLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter"&gt;</span><br><span class="line">       &lt;constructor-arg value="$&#123;cas.server.url&#125;/logout"/&gt;</span><br><span class="line">       &lt;constructor-arg&gt;</span><br><span class="line">           &lt;bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">       &lt;/constructor-arg&gt;</span><br><span class="line">       &lt;property name="filterProcessesUrl" value="/j_spring_cas_security_logout"/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- This filter handles a Single Logout Request from the CAS Server --&gt;</span><br><span class="line">    &lt;bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;bean id="logoutSuccessHandler"</span><br><span class="line">        class="com.xxxxx.webapp.common.security.employee.authn.DefaultLogoutSuccessHandler"&gt;</span><br><span class="line">        &lt;property name="defaultTargetUrl" value="/j_spring_cas_security_logout"&gt;&lt;/property&gt;</span><br><span class="line">        &lt;property name="alwaysUseDefaultTargetUrl" value="true"&gt;&lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;bean id="casEntryPoint"  class="com.xxxxx.webapp.common.security.cas.CasTargetUrlAuthenticationEntryPoint"&gt;</span><br><span class="line">        &lt;property name="loginUrl" value="$&#123;cas.server.url&#125;/login"/&gt;</span><br><span class="line">        &lt;property name="serviceProperties" ref="casServiceProperties"/&gt;</span><br><span class="line">        &lt;property name="targetUrl" value="$&#123;platform.admin.server.url&#125;"&gt;&lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;bean id="casServiceProperties" class="com.xxxxx.webapp.common.security.cas.CasServiceProperties"&gt;</span><br><span class="line">        &lt;constructor-arg value="$&#123;platform.cas.login.filter.processes.url&#125;"/&gt;</span><br><span class="line">        &lt;property name="sendRenew" value="false"/&gt;</span><br><span class="line">        &lt;property name="authenticateAllArtifacts" value="true"/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;bean id="casProcessingFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter"&gt;</span><br><span class="line">        &lt;property name="authenticationManager" ref="authenticationManager" /&gt;</span><br><span class="line">        &lt;property name="authenticationFailureHandler"&gt;</span><br><span class="line">            &lt;bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"&gt;</span><br><span class="line">                 &lt;property name="defaultFailureUrl" value="/casfailed.jsp" /&gt;</span><br><span class="line">            &lt;/bean&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property name="authenticationSuccessHandler"&gt;</span><br><span class="line">            &lt;bean class="com.xxxxx.webapp.common.security.employee.authn.DefaultAuthenticationSuccessHandler"/&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property name="filterProcessesUrl" value="/$&#123;platform.cas.login.filter.processes.url&#125;"&gt;&lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;security:authentication-manager alias="authenticationManager"&gt;</span><br><span class="line">        &lt;security:authentication-provider ref="casAuthenticationProvider" /&gt;</span><br><span class="line">    &lt;/security:authentication-manager&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;bean id="casAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider"&gt;</span><br><span class="line">        &lt;property name="authenticationUserDetailsService"&gt;</span><br><span class="line">            &lt;!-- &lt;bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper"&gt;</span><br><span class="line">                &lt;constructor-arg ref="userService" /&gt;</span><br><span class="line">            &lt;/bean&gt; --&gt;</span><br><span class="line">            &lt;bean class="com.xxxxx.webapp.common.security.cas.CasUserDetailService" /&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property name="serviceProperties" ref="casServiceProperties"&gt;&lt;/property&gt;</span><br><span class="line">        &lt;property name="ticketValidator"&gt;</span><br><span class="line">            &lt;bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator"&gt;</span><br><span class="line">                &lt;constructor-arg index="0" value="$&#123;cas.server.url&#125;"/&gt;</span><br><span class="line">            &lt;/bean&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property name="key" value="security"/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">     </span><br><span class="line">    &lt;bean id="accessDecisionManager"</span><br><span class="line">        class="org.springframework.security.access.vote.AffirmativeBased"&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;property name="decisionVoters"&gt;</span><br><span class="line">            &lt;list&gt;</span><br><span class="line">                &lt;bean class="org.springframework.security.web.access.expression.WebExpressionVoter" /&gt;</span><br><span class="line">                &lt;bean class="com.xxxxxx.webapp.common.security.employee.authz.DefaultApplicationPermissionVoter" /&gt;</span><br><span class="line">            &lt;/list&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<p>CAS 服务端<br>在验证ST的开始，需要从request中获取service对象，默认调用关系为：<br>org.jasig.cas.web.ServiceValidateController.handleRequestInternal(HttpServletRequest,HttpServletResponse)——&gt;org.jasig.cas.web.support.AbstractArgumentExtractor.extractService(HttpServletRequest)———&gt;org.jasig.cas.web.support.CasArgumentExtractor.extractServiceInternal(HttpServletRequest)——&gt;org.jasig.cas.authentication.principal.SimpleWebApplicationServiceImpl.createServiceFrom(HttpServletRequest)</p>
+<p>但是默认流程不能处理我们在CAS Client端加的targetUrl参数。最终的service对象就是SimpleWebApplicationServiceImpl，而它不能扩展，所以复制这个类，增加自己的变量。如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.jasig.cas.authentication.principal.AbstractWebApplicationService;</span><br><span class="line"><span class="keyword">import</span> org.jasig.cas.authentication.principal.Response;</span><br><span class="line"><span class="keyword">import</span> org.jasig.cas.authentication.principal.Response.ResponseType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TargetUrlWebApplicationServiceImple</span> <span class="keyword">extends</span> <span class="title">AbstractWebApplicationService</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONST_PARAM_SERVICE = <span class="string">"service"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONST_PARAM_TARGET_SERVICE = <span class="string">"targetService"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONST_PARAM_TICKET = <span class="string">"ticket"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONST_PARAM_METHOD = <span class="string">"method"</span>;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONST_PARAM_ORIGIN_TARGET_URL = <span class="string">"targetUrl"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ResponseType responseType;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">private</span> String targetUrl;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">8334068957483758042L</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TargetUrlWebApplicationServiceImple</span><span class="params">(<span class="keyword">final</span> String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(id, id, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">TargetUrlWebApplicationServiceImple</span><span class="params">(<span class="keyword">final</span> String id,</span><br><span class="line">        <span class="keyword">final</span> String originalUrl, <span class="keyword">final</span> String artifactId,</span><br><span class="line">        <span class="keyword">final</span> ResponseType responseType, String targetUrl)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(id, originalUrl, artifactId);</span><br><span class="line">        <span class="keyword">this</span>.responseType = responseType;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">this</span>.targetUrl = targetUrl;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TargetUrlWebApplicationServiceImple <span class="title">createServiceFrom</span><span class="params">(</span><br><span class="line">        <span class="keyword">final</span> HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String targetService = request</span><br><span class="line">            .getParameter(CONST_PARAM_TARGET_SERVICE);</span><br><span class="line">        String targetUrl = request</span><br><span class="line">                .getParameter(CONST_PARAM_ORIGIN_TARGET_URL);</span><br><span class="line">        <span class="keyword">final</span> String method = request.getParameter(CONST_PARAM_METHOD);</span><br><span class="line">        <span class="keyword">final</span> String serviceToUse = StringUtils.hasText(targetService)</span><br><span class="line">            ? targetService : request.getParameter(CONST_PARAM_SERVICE);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.hasText(serviceToUse)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">final</span> String id = cleanupUrl(serviceToUse);</span><br><span class="line">        <span class="keyword">final</span> String artifactId = request.getParameter(CONST_PARAM_TICKET);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TargetUrlWebApplicationServiceImple(id, serviceToUse,</span><br><span class="line">            artifactId, <span class="string">"POST"</span>.equals(method) ? ResponseType.POST</span><br><span class="line">                : ResponseType.REDIRECT, targetUrl);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">getResponse</span><span class="params">(<span class="keyword">final</span> String ticketId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Map&lt;String, String&gt; parameters = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (StringUtils.hasText(ticketId)) &#123;</span><br><span class="line">            parameters.put(CONST_PARAM_TICKET, ticketId);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (ResponseType.POST == <span class="keyword">this</span>.responseType) &#123;</span><br><span class="line">            <span class="keyword">return</span> Response.getPostResponse(targetUrl, parameters);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Response.getRedirectResponse(targetUrl, parameters);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是其调用类<code>CasArgumentExtractor</code>的方法也不能扩展，所以复制该类，更改为调用自己的实现类<code>TargetUrlCasArgumentExtractor</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.jasig.cas.authentication.principal.WebApplicationService;</span><br><span class="line"><span class="keyword">import</span> org.jasig.cas.web.support.AbstractArgumentExtractor;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TargetUrlCasArgumentExtractor</span> <span class="keyword">extends</span> <span class="title">AbstractArgumentExtractor</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> WebApplicationService <span class="title">extractServiceInternal</span><span class="params">(<span class="keyword">final</span> HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> TargetUrlWebApplicationServiceImple.createServiceFrom(request);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意在uniqueIdGenerators.xml进行配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">util:map</span> <span class="attribute">id</span>=<span class="value">"uniqueIdGeneratorsMap"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- &lt;entry</span><br><span class="line">            key="org.jasig.cas.authentication.principal.SimpleWebApplicationServiceImpl"</span><br><span class="line">            value-ref="serviceTicketUniqueIdGenerator" /&gt; --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">entry</span></span><br><span class="line">            <span class="attribute">key</span>=<span class="value">"com.xxx.cas.webapp.authn.TargetUrlWebApplicationServiceImple"</span></span><br><span class="line">            <span class="attribute">value-ref</span>=<span class="value">"serviceTicketUniqueIdGenerator"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">util:map</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>那么在用户调用重定向地址时，我们返回的是域名，而最终在CAS中注册，并且logout返回的都是ip和端口号。<br>这样既能保证用户访问时，使用域名能够正常访问，还能保证一个用户在CAS注册时，使用的是ip，以至于当用户logout时，能够通过ip和端口号通知相应的服务器进行logout操作。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/cas/">cas</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/05/03/[Cas]CAS单点登录、单点退出nginx下多个应用服务器问题的解决/" data-title="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决 | anshome" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/03/hello-world/" title="Hello World">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Hello World</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/02/13/[Tomcat]获取tomcat ip和端口号/"  title="获取tomcat ip和端口号">
+ <strong>下一篇：</strong><br/> 
+ <span>获取tomcat ip和端口号
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/05/03/[Cas]CAS单点登录、单点退出nginx下多个应用服务器问题的解决/" data-title="CAS单点登录、单点退出|nginx下多个应用服务器问题的解决" data-url="http://yoursite.com/2015/05/03/[Cas]CAS单点登录、单点退出nginx下多个应用服务器问题的解决/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遇到的问题"><span class="toc-number">2.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题原因"><span class="toc-number">3.</span> <span class="toc-text">问题原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAS单点登出原理和解决办法"><span class="toc-number">4.</span> <span class="toc-text">CAS单点登出原理和解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以下从代码角度进行分析"><span class="toc-number">5.</span> <span class="toc-text">以下从代码角度进行分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#But"><span class="toc-number"></span> <span class="toc-text">But</span></a>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Mysql/" title="Mysql">Mysql<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/cas/" title="cas">cas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/duoshuo/" title="duoshuo">duoshuo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/error/" title="error">error<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/" title="java">java<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/rest/" title="rest">rest<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/tomcat/" title="tomcat">tomcat<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/秘钥/" title="秘钥">秘钥<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/黑客/" title="黑客">黑客<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码的农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 既然无路可选，就做好当下的事。 <br/>
+			This is truely アンセイライ&#39;s blog.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="anseirai">anseirai</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"anseirai"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
