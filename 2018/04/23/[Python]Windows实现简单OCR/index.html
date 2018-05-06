@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="简单的实现ocrubuntu ocr这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。 首先找到tesseract对应的w">
+    <meta name="description" content="简单的实现ocrubuntu ocr这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。接下来开始在windows上实现吧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows实现简单OCR">
 <meta property="og:url" content="http://anseirai.github.io/2018/04/23/[Python]Windows实现简单OCR/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="简单的实现ocrubuntu ocr这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。 首先找到tesseract对应的w">
+<meta property="og:description" content="简单的实现ocrubuntu ocr这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。接下来开始在windows上实现吧。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-06T03:43:31.113Z">
+<meta property="og:updated_time" content="2018-05-06T03:54:10.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows实现简单OCR">
-<meta name="twitter:description" content="简单的实现ocrubuntu ocr这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。 首先找到tesseract对应的w">
+<meta name="twitter:description" content="简单的实现ocrubuntu ocr这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。接下来开始在windows上实现吧。">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -97,7 +97,7 @@
 		
 		</div>
 		
-		<h3 id="简单的实现ocr">简单的实现ocr</h3><p><a href="http://www.tecoed.co.uk/python-ocr.html" target="_blank" rel="noopener">ubuntu ocr</a><br>这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。</p>
+		<h3 id="简单的实现ocr">简单的实现ocr</h3><p><a href="http://www.tecoed.co.uk/python-ocr.html" target="_blank" rel="noopener">ubuntu ocr</a><br>这个能够完全在ubuntu17.10.1能够完全实现，需要注意的只是需要自己安装idle（Python的IDE），但是到了windows上就不太一样了。上文列出了三个需要安装的，一个是tesseract-ocr这个软件，还有一个pytesseract：用来使用python调用tesseract。还有ptyhon Image包。<br>接下来开始在windows上实现吧。（实验系统windows10）<br><a id="more"></a></p>
 <h3 id="首先找到tesseract对应的window版本">首先找到tesseract对应的window版本</h3><p><a href="https://github.com/tesseract-ocr/tesseract/wiki" target="_blank" rel="noopener">windows ocr</a>。直接下载安装window的exe即可。然后把需要在系统变量path中指定路径，也可以在程序中进行说明：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytesseract.pytesseract.tesseract_cmd = <span class="string">'C:/Program Files (x86)/Tesseract-OCR/tesseract'</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="再者是pytesseract。">再者是pytesseract。</h3><p>原文中也是pip安装。这里也同样。</p>
 <h3 id="最后是python_Image_包。">最后是python Image 包。</h3><p>本来打开<a href="https://blog.csdn.net/boycycyzero/article/details/42647161" target="_blank" rel="noopener">link</a>. 准备手动安装，然后用pip list查看python已经默认安装好了。这个link中有句话需要注意。就是Image包的引用，需要改成如下。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from PIL <span class="keyword">import</span> Image</span><br></pre></td></tr></table></figure></p>
