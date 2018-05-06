@@ -17,10 +17,13 @@
 <meta property="og:url" content="http://anseirai.github.io/2014/07/01/[Other]map地图坐标转换/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introduction以前在接触微信定位时就考察过这方面的东西，但是现在看来，当初还是调研不够仔细。">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="http://7d9i0t.com1.z0.glb.clouddn.com/mapmap地图坐标转换map coordinates convert - map-api.png">
+<meta property="og:updated_time" content="2015-06-07T04:19:46.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="map地图坐标转换">
 <meta name="twitter:description" content="Introduction以前在接触微信定位时就考察过这方面的东西，但是现在看来，当初还是调研不够仔细。">
+<meta name="twitter:image" content="http://7d9i0t.com1.z0.glb.clouddn.com/mapmap地图坐标转换map coordinates convert - map-api.png">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -32,7 +35,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -44,7 +47,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -60,7 +63,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -83,14 +86,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-07-01T10:11:12.000Z" itemprop="datePublished"> 發表於 2014-07-01</time>
+    <time datetime="2014-07-01T10:11:12.000Z" itemprop="datePublished"> Published 2014-07-01</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总述"><span class="toc-number">2.</span> <span class="toc-text">总述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微信开发中的有关坐标"><span class="toc-number">3.</span> <span class="toc-text">微信开发中的有关坐标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坐标转化工具"><span class="toc-number">4.</span> <span class="toc-text">坐标转化工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#over"><span class="toc-number">6.</span> <span class="toc-text">over</span></a></li></ol>
 		
@@ -101,19 +104,19 @@
 <h3 id="微信开发中的有关坐标">微信开发中的有关坐标</h3><p>微信消息发送的地址采用的是腾讯地图的坐标系；而在开发者模式中，微信服务器推送给开发者的位置事件中的地址是GPS定位的结果，需要转换成百度坐标系（或其他坐标系）才能使用。</p>
 <p>这里提供几个在解决问题时遇到的好的工具</p>
 <ul>
-<li>GPS转谷歌百度地图经纬度及相应接口：<a href="http://map.yanue.net/gps.html" target="_blank" rel="external">http://map.yanue.net/gps.html</a></li>
-<li>百度坐标拾取系统：<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank" rel="external">http://api.map.baidu.com/lbsapi/getpoint/index.html</a></li>
-<li>腾讯坐标拾取器：<a href="http://api.map.soso.com/doc_v2/tooles/picker.html" target="_blank" rel="external">http://api.map.soso.com/doc_v2/tooles/picker.html</a></li>
-<li>百度地图API示例：<a href="http://developer.baidu.com/map/jsdemo.htm#a1_2" target="_blank" rel="external">http://developer.baidu.com/map/jsdemo.htm#a1_2</a></li>
+<li>GPS转谷歌百度地图经纬度及相应接口：<a href="http://map.yanue.net/gps.html" target="_blank" rel="noopener">http://map.yanue.net/gps.html</a></li>
+<li>百度坐标拾取系统：<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank" rel="noopener">http://api.map.baidu.com/lbsapi/getpoint/index.html</a></li>
+<li>腾讯坐标拾取器：<a href="http://api.map.soso.com/doc_v2/tooles/picker.html" target="_blank" rel="noopener">http://api.map.soso.com/doc_v2/tooles/picker.html</a></li>
+<li>百度地图API示例：<a href="http://developer.baidu.com/map/jsdemo.htm#a1_2" target="_blank" rel="noopener">http://developer.baidu.com/map/jsdemo.htm#a1_2</a></li>
 </ul>
 <h3 id="坐标转化工具">坐标转化工具</h3><p>首先有一个表示地点的类<code>Point</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> BigDecimal longitude;</span><br><span class="line">        <span class="keyword">private</span> BigDecimal latitude;</span><br><span class="line">         </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Point <span class="title">getPoint</span><span class="params">(BigDecimal longitude, BigDecimal latitude)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Point(longitude, latitude);</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Point</span><span class="params">(BigDecimal longitude, BigDecimal latitude)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.longitude = longitude;</span><br><span class="line">            <span class="keyword">this</span>.latitude = latitude;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> BigDecimal <span class="title">getLongitude</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> longitude;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> BigDecimal <span class="title">getLatitude</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> latitude;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>百度转GCJ-02<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Point <span class="title">baiduToMars</span><span class="params">(Point point)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> x = point.getLongitude().doubleValue() - <span class="number">0.0065</span>;</span><br><span class="line">        <span class="keyword">double</span> y = point.getLatitude().doubleValue() - <span class="number">0.006</span>;</span><br><span class="line">        <span class="keyword">double</span> xPi = x / <span class="number">180.0</span>;</span><br><span class="line">        <span class="keyword">double</span> z = Math.sqrt(x * x + y * y) - <span class="number">0.00002</span> * Math.sin(y * xPi);</span><br><span class="line">        <span class="keyword">double</span> theta = Math.atan2(y, x) - <span class="number">0.000003</span> * Math.cos(x * xPi);</span><br><span class="line">        BigDecimal longitude = BigDecimal.valueOf(z * Math.cos(theta));</span><br><span class="line">        BigDecimal latitude = BigDecimal.valueOf(z * Math.sin(theta));</span><br><span class="line">        <span class="keyword">return</span> Point.getPoint(longitude, latitude);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>GCJ-02转百度<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Point <span class="title">marsToBaidu</span><span class="params">(Point point)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> xPi = <span class="number">3.14159265358979324</span> * <span class="number">3000.0</span> / <span class="number">180.0</span>;</span><br><span class="line">        <span class="keyword">double</span> x = point.getLongitude().doubleValue();</span><br><span class="line">        <span class="keyword">double</span> y = point.getLatitude().doubleValue();</span><br><span class="line">        <span class="keyword">double</span> z = Math.sqrt(x * x + y * y) + <span class="number">0.00002</span> * Math.sin(y * xPi);</span><br><span class="line">        <span class="keyword">double</span> theta = Math.atan2(y, x) + <span class="number">0.000003</span> * Math.cos(x * xPi);</span><br><span class="line">        x = z * Math.cos(theta) + <span class="number">0.0065</span>;</span><br><span class="line">        y = z * Math.sin(theta) + <span class="number">0.006</span>;</span><br><span class="line">        BigDecimal longitude = BigDecimal.valueOf(x);</span><br><span class="line">        BigDecimal latitude = BigDecimal.valueOf(y);</span><br><span class="line">        <span class="keyword">return</span> Point.getPoint(longitude, latitude);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>WGS-84转GCJ-02<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EvilTransform</span> </span>&#123;<span class="comment">//World Geodetic System to Mars Geodetic System</span></span><br><span class="line">        <span class="comment">// Krasovsky 1940</span></span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">double</span> pi = <span class="number">3.14159265358979324</span>;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">double</span> a = <span class="number">6378245.0</span>;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">double</span> ee = <span class="number">0.00669342162296594323</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Point <span class="title">transform</span><span class="params">(Point point)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">double</span> worldLongitude = point.getLongitude().doubleValue();</span><br><span class="line">            <span class="keyword">double</span> worldLatitude = point.getLatitude().doubleValue();</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">double</span> dLat = transformLatitude(worldLongitude - <span class="number">105.0</span>, worldLatitude - <span class="number">35.0</span>);</span><br><span class="line">            <span class="keyword">double</span> dLon = transformLongitude(worldLongitude - <span class="number">105.0</span>, worldLatitude - <span class="number">35.0</span>);</span><br><span class="line">            <span class="keyword">double</span> radLat = worldLatitude / <span class="number">180.0</span> * pi;</span><br><span class="line">            <span class="keyword">double</span> magic = Math.sin(radLat);</span><br><span class="line">            magic = <span class="number">1</span> - ee * magic * magic;</span><br><span class="line">            <span class="keyword">double</span> sqrtMagic = Math.sqrt(magic);</span><br><span class="line">            dLat = (dLat * <span class="number">180.0</span>) / ((a * (<span class="number">1</span> - ee)) / (magic * sqrtMagic) * pi);</span><br><span class="line">            dLon = (dLon * <span class="number">180.0</span>) / (a / sqrtMagic * Math.cos(radLat) * pi);</span><br><span class="line">            <span class="keyword">double</span> marsLatitude = worldLatitude + dLat;</span><br><span class="line">            <span class="keyword">double</span> marsLongitude = worldLongitude + dLon;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Point(BigDecimal.valueOf(marsLongitude), BigDecimal.valueOf(marsLatitude));</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">transformLatitude</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">double</span> ret = -<span class="number">100.0</span> + <span class="number">2.0</span> * x + <span class="number">3.0</span> * y + <span class="number">0.2</span> * y * y + <span class="number">0.1</span> * x * y + <span class="number">0.2</span> * Math.sqrt(Math.abs(x));</span><br><span class="line">            ret += (<span class="number">20.0</span> * Math.sin(<span class="number">6.0</span> * x * pi) + <span class="number">20.0</span> * Math.sin(<span class="number">2.0</span> * x * pi)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">            ret += (<span class="number">20.0</span> * Math.sin(y * pi) + <span class="number">40.0</span> * Math.sin(y / <span class="number">3.0</span> * pi)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">            ret += (<span class="number">160.0</span> * Math.sin(y / <span class="number">12.0</span> * pi) + <span class="number">320</span> * Math.sin(y * pi / <span class="number">30.0</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">transformLongitude</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">double</span> ret = <span class="number">300.0</span> + x + <span class="number">2.0</span> * y + <span class="number">0.1</span> * x * x + <span class="number">0.1</span> * x * y + <span class="number">0.1</span> * Math.sqrt(Math.abs(x));</span><br><span class="line">            ret += (<span class="number">20.0</span> * Math.sin(<span class="number">6.0</span> * x * pi) + <span class="number">20.0</span> * Math.sin(<span class="number">2.0</span> * x * pi)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">            ret += (<span class="number">20.0</span> * Math.sin(x * pi) + <span class="number">40.0</span> * Math.sin(x / <span class="number">3.0</span> * pi)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">            ret += (<span class="number">150.0</span> * Math.sin(x / <span class="number">12.0</span> * pi) + <span class="number">300.0</span> * Math.sin(x / <span class="number">30.0</span> * pi)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="参考链接">参考链接</h3><ul>
-<li><a href="http://www.biaodianfu.com/coordinate-system.html" target="_blank" rel="external">http://www.biaodianfu.com/coordinate-system.html</a></li>
-<li><a href="https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936" target="_blank" rel="external">https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936</a></li>
-<li><a href="http://mp.weixin.qq.com/qa/index.php?qa=9465&amp;qa_1=%E6%8E%A5%E6%94%B6%E7%9A%84%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%AE%B6%E5%9C%B0%E5%9B%BE%E4%B8%AD%E6%98%BE%E7%A4%BA%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%81%8F%E5%B7%AE%E5%BE%88%E5%A4%A7（2015-6-7" target="_blank" rel="external">http://mp.weixin.qq.com/qa/index.php?qa=9465&amp;qa_1=%E6%8E%A5%E6%94%B6%E7%9A%84%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%AE%B6%E5%9C%B0%E5%9B%BE%E4%B8%AD%E6%98%BE%E7%A4%BA%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%81%8F%E5%B7%AE%E5%BE%88%E5%A4%A7（2015-6-7</a> 12:19:36该连接已经失效）<h3 id="over">over</h3></li>
+<li><a href="http://www.biaodianfu.com/coordinate-system.html" target="_blank" rel="noopener">http://www.biaodianfu.com/coordinate-system.html</a></li>
+<li><a href="https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936" target="_blank" rel="noopener">https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936</a></li>
+<li><a href="http://mp.weixin.qq.com/qa/index.php?qa=9465&amp;qa_1=%E6%8E%A5%E6%94%B6%E7%9A%84%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%AE%B6%E5%9C%B0%E5%9B%BE%E4%B8%AD%E6%98%BE%E7%A4%BA%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%81%8F%E5%B7%AE%E5%BE%88%E5%A4%A7（2015-6-7" target="_blank" rel="noopener">http://mp.weixin.qq.com/qa/index.php?qa=9465&amp;qa_1=%E6%8E%A5%E6%94%B6%E7%9A%84%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%AE%B6%E5%9C%B0%E5%9B%BE%E4%B8%AD%E6%98%BE%E7%A4%BA%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%81%8F%E5%B7%AE%E5%BE%88%E5%A4%A7（2015-6-7</a> 12:19:36该连接已经失效）<h3 id="over">over</h3></li>
 </ul>
   
 	</div>
@@ -171,22 +174,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总述"><span class="toc-number">2.</span> <span class="toc-text">总述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微信开发中的有关坐标"><span class="toc-number">3.</span> <span class="toc-text">微信开发中的有关坐标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坐标转化工具"><span class="toc-number">4.</span> <span class="toc-text">坐标转化工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#over"><span class="toc-number">6.</span> <span class="toc-text">over</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -252,7 +255,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -274,7 +277,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -309,7 +312,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -478,7 +481,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

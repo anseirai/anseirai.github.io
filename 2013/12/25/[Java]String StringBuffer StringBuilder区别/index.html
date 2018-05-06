@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2013/12/25/[Java]String StringBuffer StringBuilder区别/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introduction如题，本文将要介绍String、StringBuffer以及StringBuilder的区别。首先要申明的是，他们的区别不大。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-07-19T13:19:46.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String StringBuffer StringBuilder区别">
 <meta name="twitter:description" content="Introduction如题，本文将要介绍String、StringBuffer以及StringBuilder的区别。首先要申明的是，他们的区别不大。">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2013-12-25T01:51:32.000Z" itemprop="datePublished"> 發表於 2013-12-25</time>
+    <time datetime="2013-12-25T01:51:32.000Z" itemprop="datePublished"> Published 2013-12-25</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String"><span class="toc-number">2.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-number">3.</span> <span class="toc-text">StringBuffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuilder"><span class="toc-number">4.</span> <span class="toc-text">StringBuilder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
@@ -135,7 +137,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="参考链接">参考链接</h4><p>原文见链接<a href="http://javahungry.blogspot.com/2013/06/difference-between-string-stringbuilder.html" target="_blank" rel="external">http://javahungry.blogspot.com/2013/06/difference-between-string-stringbuilder.html</a></p>
+<h4 id="参考链接">参考链接</h4><p>原文见链接<a href="http://javahungry.blogspot.com/2013/06/difference-between-string-stringbuilder.html" target="_blank" rel="noopener">http://javahungry.blogspot.com/2013/06/difference-between-string-stringbuilder.html</a></p>
 <h4 id="OVER">OVER</h4>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -192,22 +194,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String"><span class="toc-number">2.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-number">3.</span> <span class="toc-text">StringBuffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuilder"><span class="toc-number">4.</span> <span class="toc-text">StringBuilder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -273,7 +275,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -295,7 +297,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -330,7 +332,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -499,7 +501,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

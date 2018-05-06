@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2015/06/05/[Other]使用hosts把实际域名和本机对应起来/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introduction申明一下》也许是我太弱了，居然不知道这种神奇。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-07-19T07:52:31.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hosts把实际域名和本机对应起来">
 <meta name="twitter:description" content="Introduction申明一下》也许是我太弱了，居然不知道这种神奇。">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-05T11:26:28.000Z" itemprop="datePublished"> 發表於 2015-06-05</time>
+    <time datetime="2015-06-05T11:26:28.000Z" itemprop="datePublished"> Published 2015-06-05</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题描述"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决关键"><span class="toc-number">3.</span> <span class="toc-text">解决关键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">4.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
@@ -99,8 +101,8 @@
 <a id="more"></a>
 <h4 id="问题描述">问题描述</h4><p>一般调用第三方登陆（例如这几天整的人头大的百度三方登陆）的接口时，都会遇到一个叫做redirect_url的参数，它往往是线上系统的域名下的某个地址，这样不能让回调地址转向本地，不利于本地测试。</p>
 <h4 id="解决关键">解决关键</h4><p> windows系统的hosts文件中可以设置让某个特定的域名和本机ip对应。hosts路径：C:\Windows\System32\drivers\etc</p>
-<p>hosts内容如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Copyright (c) <span class="number">1993</span>-<span class="number">2009</span> Microsoft Corp.</span><br><span class="line">#</span><br><span class="line"># This is a sample HOSTS file used by Microsoft TCP/IP <span class="keyword">for</span> Windows.</span><br><span class="line">#</span><br><span class="line"># This file contains the mappings of IP addresses to host names. Each</span><br><span class="line"># entry should be kept on an individual line. The IP address should</span><br><span class="line"># be placed in the first column followed by the corresponding host name.</span><br><span class="line"># The IP address and the host name should be separated by at least one</span><br><span class="line"># space.</span><br><span class="line">#</span><br><span class="line"># Additionally, comments (such as these) may be inserted on individual</span><br><span class="line"># lines or following the machine name denoted by a <span class="string">'#'</span> symbol.</span><br><span class="line">#</span><br><span class="line"># For example:</span><br><span class="line">#</span><br><span class="line">#      <span class="number">102.54</span><span class="number">.94</span><span class="number">.97</span>     rhino.acme.com          # source server</span><br><span class="line">#       <span class="number">38.25</span><span class="number">.63</span><span class="number">.10</span>     x.acme.com              # x client host</span><br><span class="line"> </span><br><span class="line"># localhost name resolution is handled within DNS itself.</span><br><span class="line">#   <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>       www.jiahuanle.net</span><br><span class="line">#   ::<span class="number">1</span>             localhost</span><br></pre></td></tr></table></figure></p>
-<p>只需把<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>       www.jiahuanle.net</span><br></pre></td></tr></table></figure></p>
+<p>hosts内容如下<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Copyright (c) <span class="number">1993</span>-<span class="number">2009</span> Microsoft Corp.</span><br><span class="line">#</span><br><span class="line"># This is a sample HOSTS file used by Microsoft TCP/IP for Windows.</span><br><span class="line">#</span><br><span class="line"># This file contains the mappings of IP addresses to host names. Each</span><br><span class="line"># entry should be kept on an individual line. The IP address should</span><br><span class="line"># be placed in the first column followed by the corresponding host name.</span><br><span class="line"># The IP address and the host name should be separated by at least one</span><br><span class="line"># space.</span><br><span class="line">#</span><br><span class="line"># Additionally, comments (such as these) may be inserted on individual</span><br><span class="line"># lines or following the machine name denoted by a '#' symbol.</span><br><span class="line">#</span><br><span class="line"># For example:</span><br><span class="line">#</span><br><span class="line">#      102.54.94.97     rhino.acme.com          # source server</span><br><span class="line">#       38.25.63.10     x.acme.com              # x client host</span><br><span class="line"> </span><br><span class="line"># localhost name resolution is handled within DNS itself.</span><br><span class="line">#   127.0.0.1       www.jiahuanle.net</span><br><span class="line">#   ::1             localhost</span><br></pre></td></tr></table></figure></p>
+<p>只需把<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 127.0.0.1       www.jiahuanle.net</span><br></pre></td></tr></table></figure></p>
 <p>前面的#号去掉，保存，就可以使其生效。</p>
 <p>接下来，就可以happy的进行本地测试了！！！！</p>
 <h4 id="OVER">OVER</h4>  
@@ -159,22 +161,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题描述"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决关键"><span class="toc-number">3.</span> <span class="toc-text">解决关键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">4.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -240,7 +242,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -262,7 +264,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -297,7 +299,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -466,7 +468,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

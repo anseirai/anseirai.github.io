@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2015/06/05/[Rest]浏览器端的RESTful测试工具不完全靠谱/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introduction最近在测试百度账号接入，获取accestoken时，文档上说推荐使用Post，而他自己的示例却是Get，结果是我能够在自己浏览器的地址栏内使用Get方法正常获取token；而奇怪的是，在REST Client中无论采用哪种方法都不能正常的通过验证。我不清楚是不是百度API把这类的测试工具给屏蔽掉了，还是其他什么原因。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-07-19T07:37:56.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器端的RESTful测试工具不完全靠谱">
 <meta name="twitter:description" content="Introduction最近在测试百度账号接入，获取accestoken时，文档上说推荐使用Post，而他自己的示例却是Get，结果是我能够在自己浏览器的地址栏内使用Get方法正常获取token；而奇怪的是，在REST Client中无论采用哪种方法都不能正常的通过验证。我不清楚是不是百度API把这类的测试工具给屏蔽掉了，还是其他什么原因。">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-05T08:28:51.000Z" itemprop="datePublished"> 發表於 2015-06-05</time>
+    <time datetime="2015-06-05T08:28:51.000Z" itemprop="datePublished"> Published 2015-06-05</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论"><span class="toc-number">2.</span> <span class="toc-text">结论</span></a></li></ol>
 		
@@ -154,22 +156,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论"><span class="toc-number">2.</span> <span class="toc-text">结论</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -235,7 +237,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -257,7 +259,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -292,7 +294,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -461,7 +463,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

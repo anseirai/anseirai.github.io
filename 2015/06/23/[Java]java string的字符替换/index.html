@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2015/06/23/[Java]java string的字符替换/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introductionleetcode中的word ladder需要对String变量中的某一个字符进行替换，而String对象在java中是不可改变的。这就需要通过新建字符串进行替换。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-06-23T09:06:28.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java string的字符替换">
 <meta name="twitter:description" content="Introductionleetcode中的word ladder需要对String变量中的某一个字符进行替换，而String对象在java中是不可改变的。这就需要通过新建字符串进行替换。">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-23T08:51:32.000Z" itemprop="datePublished"> 發表於 2015-06-23</time>
+    <time datetime="2015-06-23T08:51:32.000Z" itemprop="datePublished"> Published 2015-06-23</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-number">2.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-number">2.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-number">3.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS"><span class="toc-number">4.</span> <span class="toc-text">PS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">5.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
@@ -98,11 +100,11 @@
 		<h4 id="Introduction">Introduction</h4><p>leetcode中的word ladder需要对<code>String</code>变量中的某一个字符进行替换，而<code>String</code>对象在java中是不可改变的。这就需要通过新建字符串进行替换。<br><a id="more"></a></p>
 <h4 id="解决方法">解决方法</h4><h5 id="方法一">方法一</h5><p>可以使用substring方法，截取原有<code>String</code>，再拼接起来。例如如下代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line">String newString2 = strCurrent.substring(<span class="number">0</span>,i) + c + strCurrent.substring(i + <span class="number">1</span>);</span><br><span class="line"><span class="comment">//result: newString2 == zhclsihigeyige</span></span><br></pre></td></tr></table></figure></p>
 <h5 id="方法二">方法二</h5><p><code>String</code>转换成<code>char</code>数组，替换后再新建。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line"><span class="keyword">char</span>[] chars = strCurrent.toCharArray();</span><br><span class="line">chars[i] = c;</span><br><span class="line">String newString1 = <span class="keyword">new</span> String(chars);</span><br><span class="line"><span class="comment">//result: newString2 == zhclsihigeyige</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="问题">问题</h4><p><font size="10">但是</font>在<a href="https://leetcode.com/problems/word-ladder/" target="_blank" rel="external">word ladder题目</a>中,<a href="https://leetcode.com/submissions/detail/30878491/" target="_blank" rel="external">方法一</a>总是超时，<a href="https://leetcode.com/submissions/detail/30912164/" target="_blank" rel="external">方法二</a>却能通过，如此一来，可能是方法一的用时过长。</p>
+<h4 id="问题">问题</h4><p><font size="10">但是</font>在<a href="https://leetcode.com/problems/word-ladder/" target="_blank" rel="noopener">word ladder题目</a>中,<a href="https://leetcode.com/submissions/detail/30878491/" target="_blank" rel="noopener">方法一</a>总是超时，<a href="https://leetcode.com/submissions/detail/30912164/" target="_blank" rel="noopener">方法二</a>却能通过，如此一来，可能是方法一的用时过长。</p>
 <p>为测试用时时长，需要利用时间函数，根据测试，时间精确到毫秒，不能检测出其差距，需要更加精准的时间函数，因此选择<code>System.nanoTime()</code>来获取纳秒时间，有如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line"><span class="keyword">long</span> time1begin  = System.nanoTime();</span><br><span class="line"><span class="keyword">char</span>[] chars = strCurrent.toCharArray();</span><br><span class="line">chars[i] = c;</span><br><span class="line">String newString1 = <span class="keyword">new</span> String(chars);</span><br><span class="line"><span class="keyword">long</span> time1end  = System.nanoTime();</span><br><span class="line">System.out.println(newString1);</span><br><span class="line">System.out.println(time1end - time1begin);</span><br><span class="line"><span class="keyword">long</span> time2begin  = System.nanoTime();</span><br><span class="line">String newString2 = strCurrent.substring(<span class="number">0</span>,i) + c + strCurrent.substring(i + <span class="number">1</span>);</span><br><span class="line"><span class="keyword">long</span> time2end  = System.nanoTime();</span><br><span class="line">System.out.println(newString2);</span><br><span class="line">System.out.println(time2end - time2begin);</span><br><span class="line"><span class="javadoc">/**</span><br><span class="line">*zhclsihigeyige</span><br><span class="line">*11794</span><br><span class="line">*zhclsihigeyige</span><br><span class="line">*70483</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">String strCurrent = <span class="string">"zhelsihigeyige"</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">'c'</span>;</span><br><span class="line"><span class="keyword">long</span> time1begin  = System.nanoTime();</span><br><span class="line"><span class="keyword">char</span>[] chars = strCurrent.toCharArray();</span><br><span class="line">chars[i] = c;</span><br><span class="line">String newString1 = <span class="keyword">new</span> String(chars);</span><br><span class="line"><span class="keyword">long</span> time1end  = System.nanoTime();</span><br><span class="line">System.out.println(newString1);</span><br><span class="line">System.out.println(time1end - time1begin);</span><br><span class="line"><span class="keyword">long</span> time2begin  = System.nanoTime();</span><br><span class="line">String newString2 = strCurrent.substring(<span class="number">0</span>,i) + c + strCurrent.substring(i + <span class="number">1</span>);</span><br><span class="line"><span class="keyword">long</span> time2end  = System.nanoTime();</span><br><span class="line">System.out.println(newString2);</span><br><span class="line">System.out.println(time2end - time2begin);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*zhclsihigeyige</span></span><br><span class="line"><span class="comment">*11794</span></span><br><span class="line"><span class="comment">*zhclsihigeyige</span></span><br><span class="line"><span class="comment">*70483</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <p>可见方法二的时间在纳秒级别上比方法一要快很6倍左右。</p>
-<h4 id="PS">PS</h4><p><code>System.currentTimeMillis()</code>获取的时间精度不一定是1ms，这需要根据具体的机器来判断。原因见<a href="http://blog.csdn.net/elky1982/article/details/4677365" target="_blank" rel="external">文章链接</a>.</p>
+<h4 id="PS">PS</h4><p><code>System.currentTimeMillis()</code>获取的时间精度不一定是1ms，这需要根据具体的机器来判断。原因见<a href="http://blog.csdn.net/elky1982/article/details/4677365" target="_blank" rel="noopener">文章链接</a>.</p>
 <h4 id="OVER">OVER</h4>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -159,22 +161,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-number">2.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-number">2.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-number">3.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS"><span class="toc-number">4.</span> <span class="toc-text">PS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">5.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -240,7 +242,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -262,7 +264,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -297,7 +299,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -466,7 +468,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

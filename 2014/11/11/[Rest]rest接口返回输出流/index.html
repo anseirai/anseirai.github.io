@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2014/11/11/[Rest]rest接口返回输出流/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introduction项目需要将rest接口风格查出来的数据导出到xls中。所以有了这篇记录。其实啦：这个记录，是看了别人的解决方案后，推想出他的解决方案的思路。不知道对不对。先记下再说哈。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-05-16T03:24:00.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rest接口返回输出流">
 <meta name="twitter:description" content="Introduction项目需要将rest接口风格查出来的数据导出到xls中。所以有了这篇记录。其实啦：这个记录，是看了别人的解决方案后，推想出他的解决方案的思路。不知道对不对。先记下再说哈。">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-11-11T07:18:48.000Z" itemprop="datePublished"> 發表於 2014-11-11</time>
+    <time datetime="2014-11-11T07:18:48.000Z" itemprop="datePublished"> Published 2014-11-11</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需求和解决设想"><span class="toc-number">2.</span> <span class="toc-text">需求和解决设想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步"><span class="toc-number">3.</span> <span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步"><span class="toc-number">4.</span> <span class="toc-text">第二步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口设计"><span class="toc-number">5.</span> <span class="toc-text">接口设计</span></a></li></ol>
 		
@@ -99,19 +101,19 @@
 <a id="more"></a>
 <h3 id="需求和解决设想">需求和解决设想</h3><p>需求：REST风格的接口也可以进行xls文件导出；</p>
 <p>想法：接口根据参数进行查库操作，将结果写入到输出流中。</p>
-<h3 id="第一步">第一步</h3><p>查找返回类型中能否返回类似outPutStream的类或接口<br>寻找[java文档](<a href="https://docs.oracle.com/javaee/6/api/" target="_blank" rel="external">https://docs.oracle.com/javaee/6/api/</a></p>
+<h3 id="第一步">第一步</h3><p>查找返回类型中能否返回类似outPutStream的类或接口<br>寻找[java文档](<a href="https://docs.oracle.com/javaee/6/api/" target="_blank" rel="noopener">https://docs.oracle.com/javaee/6/api/</a></p>
 <ul>
 <li>overview-summary.html)中rs有关的包。<br>javax.ws.rs            High-level interfaces and annotations used to create RESTful service resources.</li>
 <li>javax.ws.rs.core        Low-level interfaces and annotations used to create RESTful service resources.</li>
 <li>javax.ws.rs.ext        APIs that provide extensions to the types supported by the JAX-RS API.</li>
 </ul>
 <p>在这些类包中找有关输出流的接口，或者找有关输出流的类。</p>
-<h3 id="第二步">第二步</h3><p><a href="https://docs.oracle.com/javaee/6/api/javax/ws/rs/core/package-summary.html" target="_blank" rel="external">javax.ws.rs.core</a>中有<code>StreamingOutput</code>接口；</p>
+<h3 id="第二步">第二步</h3><p><a href="https://docs.oracle.com/javaee/6/api/javax/ws/rs/core/package-summary.html" target="_blank" rel="noopener">javax.ws.rs.core</a>中有<code>StreamingOutput</code>接口；</p>
 <p>该接口功能：当接口需要以流的形式返回值的时候，可以用此接口。 </p>
-<p>那么使接口返回的response实现StreamingOutput接口。并在实现的方法中将xls表格写入输出流。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelStreamingResponse</span> <span class="keyword">extends</span> <span class="title">ServiceResponse</span> <span class="keyword">implements</span> <span class="title">StreamingOutput</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> HSSFWorkbook wb;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExcelStreamingResponse</span><span class="params">()</span> </span>&#123;      </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExcelStreamingResponse</span><span class="params">(HSSFWorkbook wb)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wb= wb;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output)</span> <span class="keyword">throws</span> IOException,</span><br><span class="line">            WebApplicationException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (wb!= <span class="keyword">null</span>) &#123;</span><br><span class="line">            wb.write(output);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>为了使http返回的文件类型为xls，查找<a href="http://tool.oschina.net/commons" target="_blank" rel="external">http content—type</a>为<code>application/vnd.ms-excel</code> <code>application/x-xls</code>（后者没有试验）</p>
-<h3 id="接口设计">接口设计</h3><p>那么接口的大概代码设计为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@GET</span></span><br><span class="line"><span class="annotation">@Path</span>(<span class="string">"/export/xls"</span>)</span><br><span class="line"><span class="annotation">@Produces</span>(<span class="string">"application/vnd.ms-excel"</span>)</span><br><span class="line"><span class="comment">//@Context 是为了向方法参数中注入信息，这里是为了绑定返回response的信息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ExcelStreamingResponse <span class="title">exportXls</span><span class="params">(@QueryParam(<span class="string">""</span>)</span> HttpServletRequest request, @Context HttpServletResponse response) <span class="keyword">throws</span> Exception</span>;</span><br></pre></td></tr></table></figure></p>
-<p>上述接口实现大致为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ExcelStreamingResponse <span class="title">exportXls</span><span class="params">(</span><br><span class="line">        HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 查库操作</span></span><br><span class="line">    。。。</span><br><span class="line">    <span class="comment">// 拼装excel</span></span><br><span class="line">    HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">    。。。</span><br><span class="line">     </span><br><span class="line">    <span class="comment">// 设置返回的文件名称</span></span><br><span class="line">    response.setHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename=我就是一个xls"</span>);</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ExcelStreamingResponse(workbook);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么使接口返回的response实现StreamingOutput接口。并在实现的方法中将xls表格写入输出流。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelStreamingResponse</span> <span class="keyword">extends</span> <span class="title">ServiceResponse</span> <span class="keyword">implements</span> <span class="title">StreamingOutput</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> HSSFWorkbook wb;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExcelStreamingResponse</span><span class="params">()</span> </span>&#123;      </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExcelStreamingResponse</span><span class="params">(HSSFWorkbook wb)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wb= wb;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output)</span> <span class="keyword">throws</span> IOException,</span></span><br><span class="line"><span class="function">            WebApplicationException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (wb!= <span class="keyword">null</span>) &#123;</span><br><span class="line">            wb.write(output);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了使http返回的文件类型为xls，查找<a href="http://tool.oschina.net/commons" target="_blank" rel="noopener">http content—type</a>为<code>application/vnd.ms-excel</code> <code>application/x-xls</code>（后者没有试验）</p>
+<h3 id="接口设计">接口设计</h3><p>那么接口的大概代码设计为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GET</span></span><br><span class="line"><span class="meta">@Path</span>(<span class="string">"/export/xls"</span>)</span><br><span class="line"><span class="meta">@Produces</span>(<span class="string">"application/vnd.ms-excel"</span>)</span><br><span class="line"><span class="comment">//@Context 是为了向方法参数中注入信息，这里是为了绑定返回response的信息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ExcelStreamingResponse <span class="title">exportXls</span><span class="params">(@QueryParam(<span class="string">""</span>)</span> HttpServletRequest request, @Context HttpServletResponse response) <span class="keyword">throws</span> Exception</span>;</span><br></pre></td></tr></table></figure></p>
+<p>上述接口实现大致为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ExcelStreamingResponse <span class="title">exportXls</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 查库操作</span></span><br><span class="line">    。。。</span><br><span class="line">    <span class="comment">// 拼装excel</span></span><br><span class="line">    HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">    。。。</span><br><span class="line">     </span><br><span class="line">    <span class="comment">// 设置返回的文件名称</span></span><br><span class="line">    response.setHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename=我就是一个xls"</span>);</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ExcelStreamingResponse(workbook);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>现在就可以进行访问下载啦</p>
   
 	</div>
@@ -169,22 +171,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需求和解决设想"><span class="toc-number">2.</span> <span class="toc-text">需求和解决设想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步"><span class="toc-number">3.</span> <span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步"><span class="toc-number">4.</span> <span class="toc-text">第二步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口设计"><span class="toc-number">5.</span> <span class="toc-text">接口设计</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -250,7 +252,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -272,7 +274,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -307,7 +309,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -476,7 +478,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

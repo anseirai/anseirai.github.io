@@ -11,18 +11,17 @@
     
 
     
-    <meta name="description" content="Introduction本文目的是在linux系统下搭建tomcat服务器。
-安装jdk安装tomcat没有非多大劲，首先按照上次经历(连接损坏)安装好jdk。">
+    <meta name="description" content="Introduction本文目的是在linux系统下搭建tomcat服务器。 安装jdk安装tomcat没有非多大劲，首先按照上次经历(连接损坏)安装好jdk。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux下安装tomcat经历">
 <meta property="og:url" content="http://anseirai.github.io/2015/01/11/[Tomcat]linux下安装tomcat经历/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introduction本文目的是在linux系统下搭建tomcat服务器。
-安装jdk安装tomcat没有非多大劲，首先按照上次经历(连接损坏)安装好jdk。">
+<meta property="og:description" content="Introduction本文目的是在linux系统下搭建tomcat服务器。 安装jdk安装tomcat没有非多大劲，首先按照上次经历(连接损坏)安装好jdk。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-05-11T16:06:14.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下安装tomcat经历">
-<meta name="twitter:description" content="Introduction本文目的是在linux系统下搭建tomcat服务器。
-安装jdk安装tomcat没有非多大劲，首先按照上次经历(连接损坏)安装好jdk。">
+<meta name="twitter:description" content="Introduction本文目的是在linux系统下搭建tomcat服务器。 安装jdk安装tomcat没有非多大劲，首先按照上次经历(连接损坏)安装好jdk。">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -34,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -46,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -62,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -85,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2015-01-11T03:24:45.000Z" itemprop="datePublished"> 發表於 2015-01-11</time>
+    <time datetime="2015-01-11T03:24:45.000Z" itemprop="datePublished"> Published 2015-01-11</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装jdk"><span class="toc-number">2.</span> <span class="toc-text">安装jdk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载tomcat"><span class="toc-number">3.</span> <span class="toc-text">下载tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用tomcat"><span class="toc-number">4.</span> <span class="toc-text">使用tomcat</span></a></li></ol>
 		
@@ -101,10 +100,10 @@
 		<h3 id="Introduction">Introduction</h3><p>本文目的是在linux系统下搭建tomcat服务器。</p>
 <h3 id="安装jdk">安装jdk</h3><p>安装tomcat没有非多大劲，首先按照<a href="">上次经历(连接损坏)</a>安装好jdk。<br><a id="more"></a></p>
 <h3 id="下载tomcat">下载tomcat</h3><p>然后下载tomcat（apache-tomcat-7.0.57 (2).tar.gz）</p>
-<h3 id="使用tomcat">使用tomcat</h3><p>解压<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-tomcat-<span class="number">7.0</span>.<span class="number">57</span>\ \(<span class="number">2</span>\).tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>改名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-tomcat-<span class="number">7.0</span>.<span class="number">57</span> tomcat7</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用tomcat">使用tomcat</h3><p>解压<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-tomcat-7.0.57\ \(2\).tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>改名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-tomcat-7.0.57 tomcat7</span><br></pre></td></tr></table></figure></p>
 <p>本次安装没有单独对tomcat进行配置，就能启动。</p>
-<p>配置请参考<a href="http://thinkpig007.blog.51cto.com/971471/1332782" target="_blank" rel="external">这篇文章</a>。</p>
+<p>配置请参考<a href="http://thinkpig007.blog.51cto.com/971471/1332782" target="_blank" rel="noopener">这篇文章</a>。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -161,22 +160,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装jdk"><span class="toc-number">2.</span> <span class="toc-text">安装jdk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载tomcat"><span class="toc-number">3.</span> <span class="toc-text">下载tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用tomcat"><span class="toc-number">4.</span> <span class="toc-text">使用tomcat</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -242,7 +241,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -264,7 +263,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -299,7 +298,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -468,7 +467,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

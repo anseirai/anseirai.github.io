@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2014/05/14/[Other]对于UTF8编码的理解/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="Introduction公司的微信获取名称用于显示，但是iphone的emoji字符不好保存，因为某些特殊字符是四个字节的。遂需要了解下utf8">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-07-19T11:47:00.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对于UTF8编码的理解">
 <meta name="twitter:description" content="Introduction公司的微信获取名称用于显示，但是iphone的emoji字符不好保存，因为某些特殊字符是四个字节的。遂需要了解下utf8">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-05-14T07:23:29.000Z" itemprop="datePublished"> 發表於 2014-05-14</time>
+    <time datetime="2014-05-14T07:23:29.000Z" itemprop="datePublished"> Published 2014-05-14</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详细介绍utf8"><span class="toc-number">2.</span> <span class="toc-text">详细介绍utf8</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ASCII"><span class="toc-number">3.</span> <span class="toc-text">ASCII</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#utf8和unicode的关系"><span class="toc-number">4.</span> <span class="toc-text">utf8和unicode的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">6.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
@@ -153,8 +155,8 @@
 </tr>
 </tbody>
 </table>
-<p>详情参考<a href="http://www.fileformat.info/info/unicode/utf8.htm" target="_blank" rel="external">原文</a></p>
-<h4 id="ASCII">ASCII</h4><p>ASCII(American Standard Code for Information Interchange)包括128个字符，其中33个字符不能显示。<br>有关ASCII介绍请参考<a href="http://ascii.911cha.com/" target="_blank" rel="external">连接</a></p>
+<p>详情参考<a href="http://www.fileformat.info/info/unicode/utf8.htm" target="_blank" rel="noopener">原文</a></p>
+<h4 id="ASCII">ASCII</h4><p>ASCII(American Standard Code for Information Interchange)包括128个字符，其中33个字符不能显示。<br>有关ASCII介绍请参考<a href="http://ascii.911cha.com/" target="_blank" rel="noopener">连接</a></p>
 <blockquote>
 <p>ASCII（American Standard Code for Information Interchange，美国信息互换标准代码，ASCⅡ）是基于拉丁字母的一套电脑编码系统。它主要用于显示现代英语和其他西欧语言。它是现今最通用的单字节编码系统，并等同于国际标准ISO/IEC 646。</p>
 <p>ASCII第一次以规范标准的型态发表是在1967年，最后一次更新则是在1986年，至今为止共定义了128个字符，其中33个字符无法显示（这是以现今操作系统为依归，但在DOS模式下可显示出一些诸如笑脸、扑克牌花式等8-bit符号），且这33个字符多数都已是陈废的控制字符，控制字符的用途主要是用来操控已经处理过的文字，在33个字符之外的是95个可显示的字符，包含用键盘敲下空白键所产生的空白字符也算1个可显示字符（显示为空白）。</p>
@@ -163,8 +165,8 @@
 <blockquote>
 <p>“安”二进制表示为<code>101101110001001</code>，如果多个字符连接起来，程序不能判断这个是一个ASCII值，还是一个unicode的“安”</p>
 </blockquote>
-<p>他们之间的关系，以及ASCII的关系，详见<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="external">原文</a></p>
-<h4 id="结论">结论</h4><p>得出的结论，如果想要匹配ASCII中的可显示字符，在unicode中一个字符一般由\u开始，后跟4位16进制数。根据<a href="http://ascii.911cha.com/" target="_blank" rel="external">查表</a>可知</p>
+<p>他们之间的关系，以及ASCII的关系，详见<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="noopener">原文</a></p>
+<h4 id="结论">结论</h4><p>得出的结论，如果想要匹配ASCII中的可显示字符，在unicode中一个字符一般由\u开始，后跟4位16进制数。根据<a href="http://ascii.911cha.com/" target="_blank" rel="noopener">查表</a>可知</p>
 <p>：可显示字符的十六进制范围是21-7E（除去空格），那末，可ASCII中的显示字符的范围就是\u0021-\u007E.</p>
 <h4 id="OVER">OVER</h4>  
 	</div>
@@ -222,22 +224,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详细介绍utf8"><span class="toc-number">2.</span> <span class="toc-text">详细介绍utf8</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ASCII"><span class="toc-number">3.</span> <span class="toc-text">ASCII</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#utf8和unicode的关系"><span class="toc-number">4.</span> <span class="toc-text">utf8和unicode的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">6.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -303,7 +305,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -325,7 +327,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -360,7 +362,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -529,7 +531,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

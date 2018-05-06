@@ -11,21 +11,17 @@
     
 
     
-    <meta name="description" content="Introduction什么是ORM，引用wikipedia
-
-Object-relational mapping (ORM, O/RM, and O/R mapping)">
+    <meta name="description" content="Introduction什么是ORM，引用wikipedia  Object-relational mapping (ORM, O/RM, and O/R mapping)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="What's ORM">
+<meta property="og:title" content="What&#39;s ORM">
 <meta property="og:url" content="http://anseirai.github.io/2014/03/08/[Java]What's ORM/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introduction什么是ORM，引用wikipedia
-
-Object-relational mapping (ORM, O/RM, and O/R mapping)">
+<meta property="og:description" content="Introduction什么是ORM，引用wikipedia  Object-relational mapping (ORM, O/RM, and O/R mapping)">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-07-21T16:00:48.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="What's ORM">
-<meta name="twitter:description" content="Introduction什么是ORM，引用wikipedia
-
-Object-relational mapping (ORM, O/RM, and O/R mapping)">
+<meta name="twitter:title" content="What&#39;s ORM">
+<meta name="twitter:description" content="Introduction什么是ORM，引用wikipedia  Object-relational mapping (ORM, O/RM, and O/R mapping)">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -37,7 +33,7 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -49,7 +45,7 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -65,7 +61,7 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -88,20 +84,20 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-03-08T06:23:32.000Z" itemprop="datePublished"> 發表於 2014-03-08</time>
+    <time datetime="2014-03-08T06:23:32.000Z" itemprop="datePublished"> Published 2014-03-08</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久化"><span class="toc-number">3.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系型数据库"><span class="toc-number">4.</span> <span class="toc-text">关系型数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Oject-Relational_Impedance_Mismatch"><span class="toc-number">5.</span> <span class="toc-text">Oject-Relational Impedance Mismatch</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#颗粒度（Granularity）"><span class="toc-number">5.1.</span> <span class="toc-text">颗粒度（Granularity）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子类（Subtypes_[inheritance]）"><span class="toc-number">5.2.</span> <span class="toc-text">子类（Subtypes [inheritance]）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Identity"><span class="toc-number">5.3.</span> <span class="toc-text">Identity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关联（Association）"><span class="toc-number">5.4.</span> <span class="toc-text">关联（Association）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据导航（Data_navigation）"><span class="toc-number">5.5.</span> <span class="toc-text">数据导航（Data navigation）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
 		</div>
 		
-		<h4 id="Introduction">Introduction</h4><p>什么是<a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="external">ORM，引用wikipedia</a></p>
+		<h4 id="Introduction">Introduction</h4><p>什么是<a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="noopener">ORM，引用wikipedia</a></p>
 <blockquote>
 <p>Object-relational mapping (ORM, O/RM, and O/R mapping)</p>
 </blockquote>
@@ -113,15 +109,15 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
 <p>核心问题是：将逻辑对象转换为可存储的原子形式，同时保护对象属性以及他们之间的关系，以便在需要时恢复成对象。 如果这种<code>存储</code>和<code>重组</code>功能实现的话，对象就可以说是能够被<code>持久化</code>了</p>
 <h4 id="持久化">持久化</h4><p>所谓持久化就是，你希望数据存活范围超过程序本身。对于java来说，就是数据存储于JVM以外，以便后溪重新获取这些数据。</p>
 <h4 id="关系型数据库">关系型数据库</h4><p>ORM主要面向的是关系型数据库（RDBMS），尽管在面向对象技术中，和关系数据库对应的是面向对象的数据库（object database：ODBMS）。但是在可预见的未来，关系数据库仍旧占据着一席之地。</p>
-<h4 id="Oject-Relational_Impedance_Mismatch">Oject-Relational Impedance Mismatch</h4><p>有时也称作paradigm mismatch。是对象模型和关系模型不能良好匹配的一种说法。RDBMS使用表结构表示数据，而像java这种面向对象语言使用对象及其关系进行表示。在关系数据库中存储和获取这些对象和它们的关系会遇到五个问题：（还没看懂，详情参考<a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="external">原文</a>）</p>
+<h4 id="Oject-Relational_Impedance_Mismatch">Oject-Relational Impedance Mismatch</h4><p>有时也称作paradigm mismatch。是对象模型和关系模型不能良好匹配的一种说法。RDBMS使用表结构表示数据，而像java这种面向对象语言使用对象及其关系进行表示。在关系数据库中存储和获取这些对象和它们的关系会遇到五个问题：（还没看懂，详情参考<a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="noopener">原文</a>）</p>
 <h5 id="颗粒度（Granularity）">颗粒度（Granularity）</h5><p>有时一个对象模型对应的类要比数据库中相应的表要多得多。</p>
 <h5 id="子类（Subtypes_[inheritance]）">子类（Subtypes [inheritance]）</h5><p>在面向对象语言中很常见。但是RDBMS没有相应的支持。</p>
 <h5 id="Identity">Identity</h5><p>RDBMS定义了千篇一律的的概念：主键。而java中既有唯一概念又有相等概念。</p>
 <h5 id="关联（Association）">关联（Association）</h5><p>面向对象语言中的关系并不直接。而RDBMS中直接使用外检进行说明。</p>
 <h5 id="数据导航（Data_navigation）">数据导航（Data navigation）</h5><p>在java中，可以根据对象关联根据一个对象找到另一个对象。而在数据库中，是使用尽量少的SQL语句和JOINs，然后从中获得所需对象。</p>
 <h4 id="参考链接">参考链接</h4><ul>
-<li><a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="external">https://en.wikipedia.org/wiki/Object-relational_mapping</a></li>
-<li><a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="external">http://hibernate.org/orm/what-is-an-orm/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Object-relational_mapping</a></li>
+<li><a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="noopener">http://hibernate.org/orm/what-is-an-orm/</a></li>
 </ul>
 <h4 id="OVER">OVER</h4>  
 	</div>
@@ -179,22 +175,22 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久化"><span class="toc-number">3.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系型数据库"><span class="toc-number">4.</span> <span class="toc-text">关系型数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Oject-Relational_Impedance_Mismatch"><span class="toc-number">5.</span> <span class="toc-text">Oject-Relational Impedance Mismatch</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#颗粒度（Granularity）"><span class="toc-number">5.1.</span> <span class="toc-text">颗粒度（Granularity）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子类（Subtypes_[inheritance]）"><span class="toc-number">5.2.</span> <span class="toc-text">子类（Subtypes [inheritance]）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Identity"><span class="toc-number">5.3.</span> <span class="toc-text">Identity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关联（Association）"><span class="toc-number">5.4.</span> <span class="toc-text">关联（Association）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据导航（Data_navigation）"><span class="toc-number">5.5.</span> <span class="toc-text">数据导航（Data navigation）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">7.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -260,7 +256,7 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -282,7 +278,7 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -317,7 +313,7 @@ Object-relational mapping (ORM, O/RM, and O/R mapping)">
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -486,7 +482,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

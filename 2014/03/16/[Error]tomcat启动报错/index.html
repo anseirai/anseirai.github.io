@@ -17,6 +17,8 @@
 <meta property="og:url" content="http://anseirai.github.io/2014/03/16/[Error]tomcat启动报错/index.html">
 <meta property="og:site_name" content="anshome">
 <meta property="og:description" content="IntroductionSSH程序启动时报错误nested exception is java.lang.NoClassDefFoundError: org/dom4j/DocumentException">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-07-19T11:56:03.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tomcat启动nested错误">
 <meta name="twitter:description" content="IntroductionSSH程序启动时报错误nested exception is java.lang.NoClassDefFoundError: org/dom4j/DocumentException">
@@ -31,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -43,7 +45,7 @@
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +61,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -82,14 +84,14 @@
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-03-16T02:50:23.000Z" itemprop="datePublished"> 發表於 2014-03-16</time>
+    <time datetime="2014-03-16T02:50:23.000Z" itemprop="datePublished"> Published 2014-03-16</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反省"><span class="toc-number">2.</span> <span class="toc-text">反省</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#纠正"><span class="toc-number">3.</span> <span class="toc-text">纠正</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">5.</span> <span class="toc-text">OVER</span></a></li></ol>
 		
@@ -99,8 +101,8 @@
 <h4 id="反省">反省</h4><p>这里首先要反省一下，有些错误不是真正的错误，很可能是由于某些已有的错误引起的错误。</p>
 <p>今天就是很好的一个例子。</p>
 <p>在启动SSH程序时，遇到了很多的问题。是由一个问题引出的其他问题，在错误中显示为“nested”，即“嵌套”。所以要注意“真正”的错误。这里的问题是“nested exception is java.lang.NoClassDefFoundError: org/dom4j/DocumentException”</p>
-<h4 id="纠正">纠正</h4><p>经过查看<a href="http://forum.spring.io/forum/spring-projects/container/19643-java-lang-noclassdeffounderror-org-dom4j-documentexception-dom4j-1-6-1-jar-added" target="_blank" rel="external">参考链接1</a>一下文字发现问题处在tomcat。把dom4j.jar放入tomcat的/bin目录，重启即可。<br>&gt;<br>Thx Enrico.I didn’t use Tomcat but Glassfish instead. I found the solution this morning. Just like you mentioned,it’s in Tomcats’libs,but not in Glassfish’s.So I added it into the lib also others jars. That could solve all the problems about “java.lang.NoClassDefFoundError:…Exception.. .</p>
-<h4 id="参考链接">参考链接</h4><p><a href="http://forum.spring.io/forum/spring-projects/container/19643-java-lang-noclassdeffounderror-org-dom4j-documentexception-dom4j-1-6-1-jar-added" target="_blank" rel="external">参考链接1</a></p>
+<h4 id="纠正">纠正</h4><p>经过查看<a href="http://forum.spring.io/forum/spring-projects/container/19643-java-lang-noclassdeffounderror-org-dom4j-documentexception-dom4j-1-6-1-jar-added" target="_blank" rel="noopener">参考链接1</a>一下文字发现问题处在tomcat。把dom4j.jar放入tomcat的/bin目录，重启即可。<br>&gt;<br>Thx Enrico.I didn’t use Tomcat but Glassfish instead. I found the solution this morning. Just like you mentioned,it’s in Tomcats’libs,but not in Glassfish’s.So I added it into the lib also others jars. That could solve all the problems about “java.lang.NoClassDefFoundError:…Exception.. .</p>
+<h4 id="参考链接">参考链接</h4><p><a href="http://forum.spring.io/forum/spring-projects/container/19643-java-lang-noclassdeffounderror-org-dom4j-documentexception-dom4j-1-6-1-jar-added" target="_blank" rel="noopener">参考链接1</a></p>
 <h4 id="OVER">OVER</h4>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -157,22 +159,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反省"><span class="toc-number">2.</span> <span class="toc-text">反省</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#纠正"><span class="toc-number">3.</span> <span class="toc-text">纠正</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OVER"><span class="toc-number">5.</span> <span class="toc-text">OVER</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -238,7 +240,7 @@
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -260,7 +262,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -295,7 +297,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -464,7 +466,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

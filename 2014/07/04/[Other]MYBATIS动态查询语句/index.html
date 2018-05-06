@@ -11,36 +11,17 @@
     
 
     
-    <meta name="description" content="Introductionmybatis的动态查询语句主要有一下几种：
-
-if
-choose
-where
-trim
-set
-foreach">
+    <meta name="description" content="Introductionmybatis的动态查询语句主要有一下几种：  if choose where trim set foreach">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MYBATIS动态查询语句">
 <meta property="og:url" content="http://anseirai.github.io/2014/07/04/[Other]MYBATIS动态查询语句/index.html">
 <meta property="og:site_name" content="anshome">
-<meta property="og:description" content="Introductionmybatis的动态查询语句主要有一下几种：
-
-if
-choose
-where
-trim
-set
-foreach">
+<meta property="og:description" content="Introductionmybatis的动态查询语句主要有一下几种：  if choose where trim set foreach">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2015-06-07T03:30:47.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYBATIS动态查询语句">
-<meta name="twitter:description" content="Introductionmybatis的动态查询语句主要有一下几种：
-
-if
-choose
-where
-trim
-set
-foreach">
+<meta name="twitter:description" content="Introductionmybatis的动态查询语句主要有一下几种：  if choose where trim set foreach">
 
     
     <link rel="alternative" href="/atom.xml" title="anshome" type="application/atom+xml">
@@ -52,7 +33,7 @@ foreach">
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -64,7 +45,7 @@ foreach">
 				<h1 class="site-name"><a href="/" title="anshome">anshome</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -80,7 +61,7 @@ foreach">
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:anseirai.github.io">
 					</form>
 					
@@ -103,14 +84,14 @@ foreach">
 		<a href="/about" title="anseirai" target="_blank" itemprop="author">anseirai</a>
 		
   <p class="article-time">
-    <time datetime="2014-07-04T07:24:18.000Z" itemprop="datePublished"> 發表於 2014-07-04</time>
+    <time datetime="2014-07-04T07:24:18.000Z" itemprop="datePublished"> Published 2014-07-04</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		
 			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、if—最简单的动态sql"><span class="toc-number">1.1.</span> <span class="toc-text">1、if—最简单的动态sql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、choose"><span class="toc-number">1.2.</span> <span class="toc-text">2、choose</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、where"><span class="toc-number">1.3.</span> <span class="toc-text">3、where</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、trim"><span class="toc-number">1.4.</span> <span class="toc-text">4、trim</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、set"><span class="toc-number">1.5.</span> <span class="toc-text">5、set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、foreach"><span class="toc-number">1.6.</span> <span class="toc-text">6、foreach</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#over"><span class="toc-number">2.</span> <span class="toc-text">over</span></a></li></ol>
 		
@@ -126,21 +107,21 @@ foreach">
 <li>foreach</li>
 </ul>
 <a id="more"></a>
-<h4 id="1、if—最简单的动态sql">1、if—最简单的动态sql</h4><p>用来判断某个条件是否满足；当条件满足时，if包含的sql才会生效。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;if test="contentFile != null"&gt;</span><br><span class="line">                content_file_id = #&#123;contentFile.id, javaType=int, jdbcType=INTEGER&#125;,</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure></p>
-<p>一般test中条件为判断是否为空，也可以判断是否等于某值，但是需要严格按照下面的格式<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;if test="url == 'Y'.toString()"&gt;</span><br><span class="line">                url = #&#123;url, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">&lt;/if&gt;</span><br><span class="line"></span><br><span class="line">&lt;if test='url == "Y"'&gt;</span><br><span class="line">                url = #&#123;url, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="1、if—最简单的动态sql">1、if—最简单的动态sql</h4><p>用来判断某个条件是否满足；当条件满足时，if包含的sql才会生效。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">if</span> test=<span class="string">"contentFile != null"</span>&gt;</span><br><span class="line">                content_file_id = #&#123;contentFile.id, javaType=int, jdbcType=INTEGER&#125;,</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure></p>
+<p>一般test中条件为判断是否为空，也可以判断是否等于某值，但是需要严格按照下面的格式<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">if</span> test=<span class="string">"url == 'Y'.toString()"</span>&gt;</span><br><span class="line">                url = #&#123;url, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">&lt;/if&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">if</span> test=<span class="string">'url == "Y"'</span>&gt;</span><br><span class="line">                url = #&#123;url, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure></p>
 <p><font color="red">PS:</font>注意以上单引号和双引号的位置。</p>
-<p>还可以进行多条件判断<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;if test="messageId != null and messageId != 0"&gt;</span><br><span class="line">                message_id = #&#123;messageId, javaType=int, jdbcType=INTEGER&#125;</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2、choose">2、choose</h4><p>相当于switch，多数情况下和when以及otherwise联合使用，一下为借来的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id="dynamicChooseTest" parameterType="Blog" resultType="Blog"&gt;</span><br><span class="line">    select * from t_blog where 1 = 1</span><br><span class="line">    &lt;choose&gt;</span><br><span class="line">        &lt;when test="title != null"&gt;</span><br><span class="line">            and title = #&#123;title&#125;</span><br><span class="line">        &lt;/when&gt;</span><br><span class="line">        &lt;when test="content != null"&gt;</span><br><span class="line">            and content = #&#123;content&#125;</span><br><span class="line">        &lt;/when&gt;</span><br><span class="line">        &lt;otherwise&gt;</span><br><span class="line">            and owner = "owner1"</span><br><span class="line">        &lt;/otherwise&gt;</span><br><span class="line">    &lt;/choose&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<p>还可以进行多条件判断<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">if</span> test=<span class="string">"messageId != null and messageId != 0"</span>&gt;</span><br><span class="line">                message_id = #&#123;messageId, javaType=int, jdbcType=INTEGER&#125;</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、choose">2、choose</h4><p>相当于switch，多数情况下和when以及otherwise联合使用，一下为借来的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"dynamicChooseTest"</span> parameterType=<span class="string">"Blog"</span> resultType=<span class="string">"Blog"</span>&gt;</span><br><span class="line">    select * from t_blog where <span class="number">1</span> = <span class="number">1</span></span><br><span class="line">    &lt;choose&gt;</span><br><span class="line">        &lt;when test=<span class="string">"title != null"</span>&gt;</span><br><span class="line">            and title = #&#123;title&#125;</span><br><span class="line">        &lt;/when&gt;</span><br><span class="line">        &lt;when test=<span class="string">"content != null"</span>&gt;</span><br><span class="line">            and content = #&#123;content&#125;</span><br><span class="line">        &lt;/when&gt;</span><br><span class="line">        &lt;otherwise&gt;</span><br><span class="line">            and owner = <span class="string">"owner1"</span></span><br><span class="line">        &lt;/otherwise&gt;</span><br><span class="line">    &lt;/choose&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
 <p>当when满足一个条件时，就会跳出choose，如果所有的when条件都未满足，则执行otherwise内的sql语句。</p>
-<h4 id="3、where">3、where</h4><p>用于sql语句中的条件判断，优点是可以忽略where中的if所包含‘and’连接符。借来代码如下；<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id="dynamicWhereTest" parameterType="Blog" resultType="Blog"&gt;</span><br><span class="line">    select * from t_blog</span><br><span class="line">    &lt;where&gt;</span><br><span class="line">        &lt;if test="title != null"&gt;</span><br><span class="line">            title = #&#123;title&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test="content != null"&gt;</span><br><span class="line">            and content = #&#123;content&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test="owner != null"&gt;</span><br><span class="line">            and owner = #&#123;owner&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、where">3、where</h4><p>用于sql语句中的条件判断，优点是可以忽略where中的if所包含‘and’连接符。借来代码如下；<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"dynamicWhereTest"</span> parameterType=<span class="string">"Blog"</span> resultType=<span class="string">"Blog"</span>&gt;</span><br><span class="line">    select * from t_blog</span><br><span class="line">    &lt;where&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"title != null"</span>&gt;</span><br><span class="line">            title = #&#123;title&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"content != null"</span>&gt;</span><br><span class="line">            and content = #&#123;content&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"owner != null"</span>&gt;</span><br><span class="line">            and owner = #&#123;owner&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
 <p>当title为空，但是content不为空时，会将<code>and content = #{content}</code>中的and忽略掉，同理语句中的or也可以忽略掉。</p>
 <h4 id="4、trim">4、trim</h4><p>可以再某些内容前面加上前缀，也可以在某些内容后面加上后缀，对应属性为<code>prefix</code>和<code>suffix</code>，当然，前后缀内容可以自己定义。</p>
 <p>也可以将<code>trim</code>包含的内容的特定内容忽略掉，前后缀都可，对应属性为<code>prefixOverrides</code>和<code>suffixOverrides</code>。</p>
-<p>以下为利用trim来替代where语句，借来的代码。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id="dynamicTrimTest" parameterType="Blog" resultType="Blog"&gt; </span><br><span class="line">    select * from t_blog  </span><br><span class="line">    &lt;trim prefix="where" prefixOverrides="and |or"&gt; </span><br><span class="line">        &lt;if test="title != null"&gt; </span><br><span class="line">            title = #&#123;title&#125; </span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">        &lt;if test="content != null"&gt; </span><br><span class="line">            and content = #&#123;content&#125; </span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">        &lt;if test="owner != null"&gt; </span><br><span class="line">            or owner = #&#123;owner&#125; </span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">    &lt;/trim&gt; </span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="5、set">5、set</h4><p>用户update语句，主要功能时忽略以逗号结尾的set语句后面的逗号。另外，set内所有东西，不能全为空。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;set&gt;</span><br><span class="line">	&lt;if test="title != null"&gt;</span><br><span class="line">		title = #&#123;title, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;if test="description != null"&gt;</span><br><span class="line">		description = #&#123;description, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;if test="url != null"&gt;</span><br><span class="line">		url = #&#123;url, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;if test="contentFile != null"&gt;</span><br><span class="line">		content_file_id = #&#123;contentFile.id, javaType=int, jdbcType=INTEGER&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;if test="order != null"&gt;</span><br><span class="line">		`order` = #&#123;order, javaType=int, jdbcType=INTEGER&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;if test="messageId != null and messageId != 0"&gt;</span><br><span class="line">		message_id = #&#123;messageId, javaType=int, jdbcType=INTEGER&#125;</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure></p>
+<p>以下为利用trim来替代where语句，借来的代码。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"dynamicTrimTest"</span> parameterType=<span class="string">"Blog"</span> resultType=<span class="string">"Blog"</span>&gt; </span><br><span class="line">    select * from t_blog  </span><br><span class="line">    &lt;trim prefix=<span class="string">"where"</span> prefixOverrides=<span class="string">"and |or"</span>&gt; </span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"title != null"</span>&gt; </span><br><span class="line">            title = #&#123;title&#125; </span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"content != null"</span>&gt; </span><br><span class="line">            and content = #&#123;content&#125; </span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"owner != null"</span>&gt; </span><br><span class="line">            or owner = #&#123;owner&#125; </span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">    &lt;/trim&gt; </span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5、set">5、set</h4><p>用户update语句，主要功能时忽略以逗号结尾的set语句后面的逗号。另外，set内所有东西，不能全为空。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;set&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"title != null"</span>&gt;</span><br><span class="line">		title = #&#123;title, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"description != null"</span>&gt;</span><br><span class="line">		description = #&#123;description, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"url != null"</span>&gt;</span><br><span class="line">		url = #&#123;url, javaType=string, jdbcType=CHAR&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"contentFile != null"</span>&gt;</span><br><span class="line">		content_file_id = #&#123;contentFile.id, javaType=int, jdbcType=INTEGER&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"order != null"</span>&gt;</span><br><span class="line">		`order` = #&#123;order, javaType=int, jdbcType=INTEGER&#125;,</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">	&lt;<span class="keyword">if</span> test=<span class="string">"messageId != null and messageId != 0"</span>&gt;</span><br><span class="line">		message_id = #&#123;messageId, javaType=int, jdbcType=INTEGER&#125;</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure></p>
 <p>当<code>messageId为</code>空，其他属性不为空时，就会忽略掉<code>order</code>属性后面的逗号。</p>
 <p>PS:这里的<code>order</code>加了反引号，是因为<code>order</code>在<code>mysql</code>中被识别为关键字，所以加上反引号加以说明它是一个属性。反引号用“1”旁边的键输入。</p>
-<h4 id="6、foreach">6、foreach</h4><p>主要用户查询条件中有“IN”的语句，具体还没用过，由于时间问题，先贴出参考链接，以后在整理。<br><a href="http://haohaoxuexi.iteye.com/blog/1338557" target="_blank" rel="external">http://haohaoxuexi.iteye.com/blog/1338557</a></p>
+<h4 id="6、foreach">6、foreach</h4><p>主要用户查询条件中有“IN”的语句，具体还没用过，由于时间问题，先贴出参考链接，以后在整理。<br><a href="http://haohaoxuexi.iteye.com/blog/1338557" target="_blank" rel="noopener">http://haohaoxuexi.iteye.com/blog/1338557</a></p>
 <h3 id="over">over</h3>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -197,22 +178,22 @@ foreach">
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、if—最简单的动态sql"><span class="toc-number">1.1.</span> <span class="toc-text">1、if—最简单的动态sql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、choose"><span class="toc-number">1.2.</span> <span class="toc-text">2、choose</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、where"><span class="toc-number">1.3.</span> <span class="toc-text">3、where</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、trim"><span class="toc-number">1.4.</span> <span class="toc-text">4、trim</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、set"><span class="toc-number">1.5.</span> <span class="toc-text">5、set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、foreach"><span class="toc-number">1.6.</span> <span class="toc-text">6、foreach</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#over"><span class="toc-number">2.</span> <span class="toc-text">over</span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -278,7 +259,7 @@ foreach">
   
 
   <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
           <li>
@@ -300,7 +281,7 @@ foreach">
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -335,7 +316,7 @@ foreach">
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="anseirai">anseirai</a>
 		
@@ -504,7 +485,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
